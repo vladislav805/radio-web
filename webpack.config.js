@@ -13,7 +13,7 @@ module.exports = {
 
     entry: {
         server: path.resolve('src', 'server', 'index.ts'),
-       // client: path.resolve('src', 'client', 'index.ts'),
+        client: path.resolve('src', 'client', 'index.ts'),
     },
 
     output: {
@@ -81,7 +81,6 @@ module.exports = {
     devtool: 'source-map',
     devServer: {
         contentBase: path.resolve('dist'),
-        host: '0.0.0.0',
         port: 8077,
     },
 

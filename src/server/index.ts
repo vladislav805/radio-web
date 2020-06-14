@@ -4,14 +4,12 @@ import getCurrentTrack from './methods/getCurrentTrack';
 
 const service = restana();
 
-//import bodyParser from 'body-parser';
-//service.use(bodyParser.json());
-
-service.get('/api/getStations', async(req, res) => {
+service.all('/api/getStations', async(req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(await getStations(req.query));
 });
 
-service.get('/api/getCurrentTrack', async(req, res) => {
+service.all('/api/getCurrentTrack', async(req, res) => {
     res.send(await getCurrentTrack(req.query));
 });
 
