@@ -30,7 +30,7 @@ export const e = (
     return node;
 };
 
-export const g = (i: string) => document.getElementById(i);
+export const g = <T extends HTMLElement>(i: string): T => document.getElementById(i) as T;
 
 export const emptyNode = (n: HTMLElement) => {
     while (n.lastChild) {

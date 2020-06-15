@@ -2,7 +2,7 @@ import apiRequest from './api';
 import './main.scss';
 import Hls from 'hls.js';
 import { dropClassForAllNodes, e, g } from './dom';
-import { IStation, IStream } from '../types';
+import { ICurrentTrack, IStation, IStream } from '../types';
 import { renderRow, renderStation, renderStream } from './renders';
 import { CLASS_LOADING_SPINNER, CLASS_STATION_ACTIVE, CLASS_STREAM_ACTIVE } from './classNames';
 import { toTimeFormat } from './utils';
@@ -19,11 +19,14 @@ function init() {
 	initAudio();
 }
 
-let wrapContent;
-let nodeControlState;
-let nodeMeta;
-let nodeTime;
-let nodeDataAmount;
+let wrapContent: HTMLElement;
+let nodeControlState: HTMLDivElement;
+let nodeMeta: HTMLDivElement;
+let nodeTime: HTMLSpanElement;
+let nodeDataAmount: HTMLSpanElement;
+let nodeImage: HTMLImageElement;
+let nodeTrackTitle: HTMLDivElement;
+let nodeTrackArtist: HTMLDivElement;
 
 document.addEventListener('DOMContentLoaded', () => {
 	wrapContent = g('content');
@@ -31,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	nodeMeta = g('p-meta');
 	nodeTime = g('p-time');
 	nodeDataAmount = g('p-amount');
+	nodeImage = g('p-image');
+	nodeTrackTitle = g('p-title');
+	nodeTrackArtist = g('p-artist');
 	init();
 });
 
@@ -39,7 +45,7 @@ const initControls = () => {
 
 	g('p-mute').addEventListener('click', () => audioPlayer.muted = !audioPlayer.muted);
 	//Player.mSettingsButton.addEventListener('click', Player.toggleSettingsList.bind(Player, false));
-	g('p-image').addEventListener('click', resolveCurrentTrack);
+	nodeImage.addEventListener('click', resolveCurrentTrack);
 
 	toggleLoadingSpinnerState(false);
 };
@@ -54,7 +60,7 @@ const pushPage = (node: HTMLElement) => {
 };
 
 const popPage = () => {
-	const target: HTMLElement = wrapContent.lastChild;
+	const target: Element = wrapContent.lastElementChild;
 	if (!target) {
 		return;
 	}
@@ -98,7 +104,7 @@ const showStreams = (station: IStation) => {
 };
 
 let audioPlayer: HTMLAudioElement;
-let hls;
+let hls: Hls;
 let currentStation: IStation = null;
 let currentStream: IStream = null;
 
@@ -165,6 +171,8 @@ const play = (station: IStation, stream: IStream) => {
 	currentStation = station;
 	currentStream = stream;
 
+	setCurrentTrack(null);
+
 	if (stream.format === 'm3u8') {
 		if (Hls.isSupported()) {
 			hls = new Hls();
@@ -188,6 +196,23 @@ const resolveCurrentTrack = () => {
 	if (!currentStream) {
 		return;
 	}
+
+	apiRequest<ICurrentTrack>('getCurrentTrack', {
+		streamId: String(currentStream.streamId)
+	}).then(setCurrentTrack);
+};
+
+const setCurrentTrack = (track: ICurrentTrack) => {
+	if (!track) {
+		track = {
+			artist: `${currentStream.cityTitle}, ${currentStream.format}, ${currentStream.bitrate} kbps`,
+			title: currentStation.title,
+		};
+	}
+
+	nodeTrackArtist.textContent = track.artist;
+	nodeTrackTitle.textContent = track.title;
+	nodeImage.src = track.image || nodeImage.dataset.defaultImage;
 };
 
 

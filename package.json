@@ -1,7 +1,7 @@
 {
 	"name": "@vladislav805/online-radio",
 	"private": true,
-	"version": "7.2.0",
+	"version": "7.3.0",
 	"scripts": {
 		"server:dev": "ts-node src/server/index.ts",
 		"client:dev": "webpack-dev-server --progress --watch",
@@ -19,8 +19,8 @@
 		"@types/mysql2": "git+https://git@github.com/types/mysql2.git",
 		"@types/node": "14.0.13",
 		"@types/webpack": "4.41.17",
-		"css-loader": "^3.6.0",
-		"dotenv": "^8.2.0",
+		"css-loader": "3.6.0",
+		"dotenv": "8.2.0",
 		"mini-css-extract-plugin": "0.9.0",
 		"node-sass": "4.14.1",
 		"sass-loader": "8.0.2",
@@ -38,5 +38,17 @@
 		"hls.js": "0.13.2",
 		"mysql2": "2.1.0",
 		"restana": "4.6.1"
+	},
+	"author": {
+		"email": "vlad@velu.ga",
+		"name": "Vladislav Veluga",
+		"url": "https://velu.ga/"
+	},
+	"bugs": {
+		"url": "https://github.com/vladislav805/radio-web/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:vladislav805/radio-web.git"
 	}
 }
