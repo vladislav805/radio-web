@@ -20,12 +20,11 @@ const getStations: IApiEndpoint<IStation[], IParams> = async rawParams => {
 
     const cachedData = cached<IStation[]>(cacheKey);
     if (cachedData) {
-        return { result: cachedData };
+        return cachedData;
     }
 
     const connect = await getConnection();
     const [stations] = await connect.execute('select * from `station`');
-
 
     let result: IStation[] = Array.from(stations as RowDataPacket[]) as IStation[];
 
@@ -48,18 +47,24 @@ const getStations: IApiEndpoint<IStation[], IParams> = async rawParams => {
 
             stream.secure = Boolean(stream.secure);
 
+            stream.canResolveTrack = Boolean(stream.trackResolverId);
+
+            delete stream.trackResolverId;
+            delete stream.trackUrl;
+
+
             stationStreams[stream.stationId].push(stream);
         });
 
         result = result.map(station => {
             station.streams = stationStreams[station.stationId];
             return station;
-        }).filter(station => station.streams.length);
+        }).filter(station => station.streams?.length);
     }
 
     cache(cacheKey, result, 10);
 
-    return { result };
+    return result;
 };
 
 export default getStations;

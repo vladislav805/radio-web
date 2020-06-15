@@ -21,6 +21,13 @@ export interface IStream {
     bitrate: number;
     secure: boolean;
     cityTitle: string;
+
+    // Used for external API
+    canResolveTrack?: boolean;
+
+    // Used for backend and has in database
+    trackUrl?: string;
+    trackResolverId?: number;
 }
 
 export interface ICurrentTrack {
@@ -29,8 +36,14 @@ export interface ICurrentTrack {
     image?: string;
 }
 
+export interface ITrackResolver {
+    resolverId: number;
+    type: 'json' | 'dynamic';
+    source: string;
+}
+
 export type IApiParams<T = Record<string, string>> = T;
 
-export type IApiEndpointResult<T> = Promise<IResult<T> | IError>;
+export type IApiEndpointResult<T> = Promise<T>;
 
-export type IApiEndpoint<R, P = never> = (params: IApiParams<Record<string, string | string[]> | P>) => IApiEndpointResult<R>;
+export type IApiEndpoint<R, P = never> = (params: IApiParams<P | Record<string, string | string[]>>) => IApiEndpointResult<R>;
