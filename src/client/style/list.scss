@@ -1,0 +1,24 @@
+@import './vars';
+
+.listItem {
+    display: flex;
+    justify-content: space-between;
+
+    line-height: 34px;
+    padding: 0 12px;
+    cursor: pointer;
+
+    transition: background-color cubic-bezier(.4, 0, .2, 1) .28s;
+
+    & + & {
+        border-top: 1px solid $color-list-item__border;
+    }
+
+    &:hover {
+        background-color: $color-list-item__hover;
+    }
+
+    &__active {
+        background: $color-list-item__active;
+    }
+}

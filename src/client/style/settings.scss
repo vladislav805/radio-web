@@ -1,0 +1,20 @@
+@import './vars';
+
+.header-control#p-settings-button {
+    background-image: $image-settings;
+    display: none;
+}
+
+.settings {
+    &-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        line-height: 36px;
+        padding: 0 12px;
+    }
+
+    &-value input[type="checkbox"] {
+        vertical-align: middle;
+    }
+}

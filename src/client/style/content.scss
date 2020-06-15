@@ -1,0 +1,34 @@
+@import './vars';
+
+.content {
+    flex: 1 1 auto;
+    overflow: auto;
+    overflow-x: hidden;
+    position: relative;
+
+    &__page {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: auto;
+        width: 100%;
+        height: 100%;
+        background: $color-window-bg;
+
+        animation: content-page__open .2s ease-in 1;
+
+        @keyframes content-page__open {
+            0% { opacity: 0; transform: scale(.6) }
+            100% { opacity: 1; transform: scale(1) }
+        }
+
+        &__close {
+            animation: content-page__close .2s ease-in 1;
+
+            @keyframes content-page__close {
+                0% { opacity: 1; transform: scale(1) }
+                100% { opacity: 0; transform: scale(.6) }
+            }
+        }
+    }
+}

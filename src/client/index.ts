@@ -4,7 +4,7 @@ import Hls from 'hls.js';
 import { dropClassForAllNodes, e, g } from './dom';
 import { ICurrentTrack, IStation, IStream } from '../types';
 import { renderRow, renderStation, renderStream } from './renders';
-import { CLASS_LOADING_SPINNER, CLASS_STATION_ACTIVE, CLASS_STREAM_ACTIVE } from './classNames';
+import { CLASS_STATION_ACTIVE, CLASS_STREAM_ACTIVE } from './classNames';
 import { toTimeFormat } from './utils';
 
 function init() {
@@ -20,6 +20,7 @@ function init() {
 }
 
 let wrapContent: HTMLElement;
+let nodeHeader: HTMLDivElement;
 let nodeControlState: HTMLDivElement;
 let nodeMeta: HTMLDivElement;
 let nodeTime: HTMLSpanElement;
@@ -30,6 +31,7 @@ let nodeTrackArtist: HTMLDivElement;
 
 document.addEventListener('DOMContentLoaded', () => {
 	wrapContent = g('content');
+	nodeHeader = g('header');
 	nodeControlState = g('p-control');
 	nodeMeta = g('p-meta');
 	nodeTime = g('p-time');
@@ -41,16 +43,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const initControls = () => {
-	nodeControlState.addEventListener('click', () => audioPlayer.paused ? audioPlayer.play() : audioPlayer.pause());
+	nodeControlState.addEventListener('click', () => {
+		const nowPlay = !audioPlayer.paused;
 
-	g('p-mute').addEventListener('click', () => audioPlayer.muted = !audioPlayer.muted);
+		nowPlay ? audioPlayer.pause() : audioPlayer.play();
+		nodeHeader.dataset.playing = String(nowPlay);
+	});
+
+	g('p-mute').addEventListener('click', () => {
+		audioPlayer.muted = !audioPlayer.muted;
+		nodeHeader.dataset.mute = String(audioPlayer.muted);
+	});
 	//Player.mSettingsButton.addEventListener('click', Player.toggleSettingsList.bind(Player, false));
 	nodeImage.addEventListener('click', resolveCurrentTrack);
 
 	toggleLoadingSpinnerState(false);
 };
 
-export const toggleLoadingSpinnerState = (state: boolean) => nodeMeta.classList.toggle(CLASS_LOADING_SPINNER, state);
+export const toggleLoadingSpinnerState = (state: boolean) => nodeHeader.dataset.loading = String(state);
 
 const pushPage = (node: HTMLElement) => {
 	node.classList.add('content__page')
@@ -142,12 +152,8 @@ const onAudioTimeUpdate = () => {
 const onAudioWaiting = () => toggleLoadingSpinnerState(true);
 const onAudioCanPlay = () => toggleLoadingSpinnerState(false);
 
-// todo: simplify
 const onAudioStateChange = () => {
-	const willPlay = audioPlayer.paused;
-
-	nodeControlState.classList.remove(!willPlay ? "icon-play-0" : "icon-play-1");
-	nodeControlState.classList.add(!willPlay ? "icon-play-1" : "icon-play-0");
+	nodeControlState.dataset.playing = String(!audioPlayer.paused);
 };
 
 const play = (station: IStation, stream: IStream) => {
@@ -186,7 +192,9 @@ const play = (station: IStation, stream: IStream) => {
 		}
 	} else {
 		audioPlayer.src = url;
-		audioPlayer.play().then(r => 0);
+
+		// noinspection JSIgnoredPromiseFromCall
+		audioPlayer.play();
 	}
 };
 

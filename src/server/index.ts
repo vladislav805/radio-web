@@ -1,8 +1,9 @@
-import getStations from './methods/getStations';
 import restana from 'restana';
+import getStations from './methods/getStations';
 import getCurrentTrack from './methods/getCurrentTrack';
-import { IApiEndpoint, IError } from '../types';
 import getStreamById from './methods/getStreamById';
+import { IApiEndpoint, IError } from '../types';
+import { SERVER_PORT } from '../shared';
 
 const service = restana();
 
@@ -28,4 +29,4 @@ service.all('/api/:method', async(req, res) => {
     }
 });
 
-service.start(7469).then(() => console.log('Server started'));
+service.start(SERVER_PORT).then(() => console.log('Server started'));
