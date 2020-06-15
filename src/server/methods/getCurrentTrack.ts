@@ -9,8 +9,9 @@ type IParams = {
 
 type ITrackResolveJsonStrategy = ICurrentTrack;
 
-type TrackResolverDynamicFunction = (url: string) => ICurrentTrack;
-type ITrackResolveDynamicStrategy = string | TrackResolverDynamicFunction;
+type ITrackResolveDynamicStrategy = {
+    source: string;
+};
 
 type ITrackResolveStrategy = ITrackResolveDynamicStrategy | ITrackResolveJsonStrategy;
 
@@ -20,9 +21,10 @@ const getCurrentTrack: IApiEndpoint<ICurrentTrack, IParams> = async props => {
         needResolver: '1',
     }) as IStream & ITrackResolver;
 
-    const strategy: ITrackResolveStrategy = JSON.parse(stream.source);
+
 
     if (stream.type === 'json') {
+        const strategy: ITrackResolveStrategy = JSON.parse(stream.source);
         const { data } = await axios.get(stream.trackUrl, {
             responseType: 'json',
         });
@@ -34,9 +36,14 @@ const getCurrentTrack: IApiEndpoint<ICurrentTrack, IParams> = async props => {
             title: getValueByPath(data, paths.title),
             image: getValueByPath(data, paths.image),
         };
+    } else {
+        const makeRequest = (url: string) => axios.get(url, {
+            responseType: 'text',
+        }).then(res => res.data);
+        const source = stream.source;
+        const fx = new Function('args', source);
+        return await fx({ stream, makeRequest });
     }
-
-    return null;
 };
 
 export default getCurrentTrack;
