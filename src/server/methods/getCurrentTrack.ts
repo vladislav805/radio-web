@@ -21,8 +21,6 @@ const getCurrentTrack: IApiEndpoint<ICurrentTrack, IParams> = async props => {
         needResolver: '1',
     }) as IStream & ITrackResolver;
 
-
-
     if (stream.type === 'json') {
         const strategy: ITrackResolveStrategy = JSON.parse(stream.source);
         const { data } = await axios.get(stream.trackUrl, {
