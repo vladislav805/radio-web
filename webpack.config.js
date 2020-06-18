@@ -9,10 +9,9 @@ const mode = isProduction ? 'production' : 'development';
 
 module.exports = {
     mode,
-    target: 'node',
+    target: 'web',
 
     entry: {
-        server: path.resolve('src', 'server', 'index.ts'),
         client: path.resolve('src', 'client', 'index.ts'),
     },
 
