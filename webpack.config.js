@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -70,6 +71,11 @@ module.exports = {
         }),
         new webpack.EnvironmentPlugin({
             VERSION: process.env.npm_package_version,
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: path.resolve('html', 'index.html'),
+            minify: true,
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css',
