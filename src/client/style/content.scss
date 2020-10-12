@@ -15,19 +15,19 @@
         height: 100%;
         background: $color-window-bg;
 
-        animation: content-page__open .2s ease-in 1;
+        animation: content-page__open .3s ease-in 1;
 
         @keyframes content-page__open {
-            0% { opacity: 0; transform: scale(.6) }
-            100% { opacity: 1; transform: scale(1) }
+            0% { opacity: 0; transform: translateX(100%) }
+            100% { opacity: 1; transform: translateX(0) }
         }
 
         &__close {
             animation: content-page__close .2s ease-in 1;
 
             @keyframes content-page__close {
-                0% { opacity: 1; transform: scale(1) }
-                100% { opacity: 0; transform: scale(.6) }
+                0% { opacity: 1; transform: translateX(0) }
+                100% { opacity: 0; transform: translateX(100%) }
             }
         }
     }
