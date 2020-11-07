@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "es5",
+        "allowJs": true,
+        "sourceMap": false,
+        "outDir": "dist",
+        "baseUrl": ".",
+        "lib": [
+            "dom",
+            "es5",
+            "es2015.promise",
+            "es6"
+        ]
+    },
+    "include": [
+        "src/client/**/*",
+        "src/shared.ts",
+        "src/types.ts"
+    ],
+    "exclude": [
+        "node_modules/*"
+    ]
+}

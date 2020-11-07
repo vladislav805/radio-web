@@ -23,6 +23,7 @@ jobs:
       - run: chmod 600 "$HOME/.ssh/key"
       # Build
       - run: npm ci
+      - run: rm node_modules/trouter/index.mjs node_modules/regexparam/dist/regexparam.mjs
       - run: npm run build
       # Deploy
-      - run: cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . vlad805@212.47.233.241:/home/vlad805/projects/radio/dist/
+      - run: cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress . vlad805@135.181.147.70:/home/vlad805/projects/radio/

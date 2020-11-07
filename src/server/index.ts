@@ -1,4 +1,4 @@
-import restana from 'restana';
+import * as restana from 'restana';
 import getStations from './methods/getStations';
 import getCurrentTrack from './methods/getCurrentTrack';
 import getStreamById from './methods/getStreamById';
