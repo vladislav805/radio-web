@@ -1,4 +1,4 @@
-import { IApiEndpoint, IStream, ITrackResolver } from '../../types';
+import type { IApiEndpoint, IStream, ITrackResolver } from '../../types';
 import { getConnection } from '../db';
 
 type IParams = {

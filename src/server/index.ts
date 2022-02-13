@@ -1,11 +1,11 @@
-import * as restana from 'restana';
+import * as express from 'express';
 import getStations from './methods/getStations';
 import getCurrentTrack from './methods/getCurrentTrack';
 import getStreamById from './methods/getStreamById';
-import { IApiEndpoint, IError } from '../types';
+import type { IApiEndpoint, IError } from '../types';
 import { SERVER_PORT } from '../shared';
 
-const service = restana();
+const service = express();
 
 const methods: Record<string, IApiEndpoint<any>> = {
     getStations,
@@ -19,7 +19,7 @@ service.all('/api/:method', async(req, res) => {
     const methodName = req.params.method;
 
     if (methodName in methods) {
-        const result = await methods[methodName](req.query);
+        const result = await methods[methodName](req.query as Record<string, string>);
 
         res.send({ result });
     } else {
@@ -29,4 +29,4 @@ service.all('/api/:method', async(req, res) => {
     }
 });
 
-service.start(SERVER_PORT).then(() => console.log('Server started'));
+service.listen(SERVER_PORT, () => console.log('Server started'));

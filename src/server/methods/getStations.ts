@@ -1,6 +1,6 @@
 import { cache, cached } from '../caching';
 import { getConnection } from '../db';
-import { IApiEndpoint, IStation, IStream } from '../../types';
+import type { IApiEndpoint, IStation, IStream } from '../../types';
 import { RowDataPacket } from 'mysql2/promise';
 
 type IParams = {
