@@ -86,7 +86,7 @@ module.exports = {
         }),
     ],
 
-    devtool: 'source-map',
+    devtool: isProduction ? undefined : 'source-map',
     devServer: {
         contentBase: path.resolve('dist'),
         port: 8077,
