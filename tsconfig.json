@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "lib": ["dom", "es5", "esnext"],
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "target": "es2019",
+        "allowJs": false,
+        "strict": false,
+        "sourceMap": true,
+        "removeComments": false,
+        "baseUrl": "src",
+    },
+    "include": [
+        "src/**/*"
+    ]
+}

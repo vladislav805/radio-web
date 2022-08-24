@@ -1,7 +1,7 @@
+import type { RowDataPacket } from 'mysql2/promise';
 import { cache, cached } from '../caching';
 import { getConnection } from '../db';
 import type { IApiEndpoint, IStation, IStream } from '../../types';
-import { RowDataPacket } from 'mysql2/promise';
 
 type IParams = {
     extended?: boolean;
@@ -35,23 +35,20 @@ const getStations: IApiEndpoint<IStation[], IParams> = async rawParams => {
 
         const [streams] = await connect.execute(sql);
 
-        const stationStreams = {};
+        const stationStreams: Record<number, IStream[]> = {};
         (Array.from(streams as RowDataPacket[]) as IStream[]).forEach(stream => {
             if (!(stream.stationId in stationStreams)) {
                 stationStreams[stream.stationId] = [];
             }
 
-            if (onlySecure && !stream.secure) {
-                return;
-            }
+            if (onlySecure && !stream.secure) return;
 
             stream.secure = Boolean(stream.secure);
 
             stream.canResolveTrack = Boolean(stream.trackResolverId);
 
-            delete stream.trackResolverId;
-            delete stream.trackUrl;
-
+            stream.trackResolverId = undefined;
+            stream.trackUrl = undefined;
 
             stationStreams[stream.stationId].push(stream);
         });

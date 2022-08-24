@@ -12,7 +12,7 @@ export const cache = <T>(name: string, data: T, ttl = 3600) => {
     };
 };
 
-export const cached = <T>(name): T | undefined => {
+export const cached = <T>(name: string): T | undefined => {
     const item = __cache[name];
     return !item || item && item.expires < getUnixTime()
         ? undefined

@@ -7,6 +7,7 @@
 		"server:build": "NODE_ENV=production webpack --config ./webpack.server.config.js",
 		"client:dev": "webpack-dev-server --progress --watch",
 		"client:build": "NODE_ENV=production webpack --config ./webpack.client.config.js",
+		"legacy:build": "cp src/server/legacy/template.html dist/template.html",
 		"build": "run-p \"client:build\" \"server:build\"",
 		"deploy": "cd dist && rsync --archive --compress . vlad805@135.181.147.70:/home/vlad805/projects/radio/"
 	},
@@ -33,6 +34,7 @@
 		"style-loader": "3.3.1",
 		"terser-webpack-plugin": "5.3.5",
 		"ts-loader": "9.3.1",
+		"ts-node": "10.9.1",
 		"typescript": "4.7.4",
 		"webpack": "5.74.0",
 		"webpack-cli": "4.10.0",
