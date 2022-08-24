@@ -7,6 +7,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 
 const mode = isProduction ? 'production' : 'development';
+const isLegacy = Boolean(process.env.LEGACY);
+
+const environment = isLegacy ? {
+    arrowFunction: false,
+    bigIntLiteral: false,
+    const: false,
+    destructuring: false,
+    dynamicImport: false,
+    forOf: false,
+    module: false,
+} : {};
 
 module.exports = {
     mode,
@@ -19,6 +30,7 @@ module.exports = {
     output: {
         path: path.resolve('dist', 'client'),
         filename: '[name].js',
+        environment,
     },
 
     module: {
