@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import type { IApiEndpoint, ICurrentTrack, IStream, ITrackResolver } from '../../types';
 import getStreamById from './getStreamById';
-import { getValueByPath } from '../utils';
+import { convertParams, getValueByPath } from '../utils';
 
 type IParams = {
     streamId: number;
@@ -16,9 +16,10 @@ type ITrackResolveDynamicStrategy = {
 
 type ITrackResolveStrategy = ITrackResolveDynamicStrategy | ITrackResolveJsonStrategy;
 
-const getCurrentTrack: IApiEndpoint<ICurrentTrack, IParams> = async props => {
+const getCurrentTrack: IApiEndpoint<ICurrentTrack> = async props => {
+    const { streamId } = convertParams<IParams>(props);
     const stream = await getStreamById({
-        streamId: String(props.streamId),
+        streamId: String(streamId),
         needResolver: '1',
     }) as IStream & ITrackResolver;
 

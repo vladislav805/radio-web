@@ -2,7 +2,7 @@ import express from 'express';
 import getStations from './methods/getStations';
 import getCurrentTrack from './methods/getCurrentTrack';
 import getStreamById from './methods/getStreamById';
-import type { IApiEndpoint, IError } from '../types';
+import type { IApiEndpoint, IApiParams, IError } from '../types';
 import { SERVER_PORT } from '../shared';
 
 const service = express();
@@ -19,7 +19,7 @@ service.all('/api/:method', async(req, res) => {
     const methodName = req.params.method;
 
     if (methodName in methods) {
-        const result = await methods[methodName](req.query as Record<string, string>);
+        const result = await methods[methodName](req.query as IApiParams);
 
         res.send({ result });
     } else {

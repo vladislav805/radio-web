@@ -1,7 +1,8 @@
 import type { RowDataPacket } from 'mysql2/promise';
 import { cache, cached } from '../caching';
 import { getConnection } from '../db';
-import type { IApiEndpoint, IStation, IStream } from '../../types';
+import type { IApiEndpoint, IApiParams, IStation, IStream } from '../../types';
+import { convertParams } from '../utils';
 
 type IParams = {
     extended?: boolean;
@@ -9,13 +10,13 @@ type IParams = {
     noReferrer?: boolean;
 };
 
-const defaultParams: IParams = {
-    extended: false,
-    onlySecure: false,
+const defaultParams: IApiParams = {
+    extended: '0',
+    onlySecure: '0',
 };
 
-const getStations: IApiEndpoint<IStation[], IParams> = async rawParams => {
-    const { extended, onlySecure, noReferrer } = { ...defaultParams, ...rawParams };
+const getStations: IApiEndpoint<IStation[]> = async rawParams => {
+    const { extended, onlySecure, noReferrer } = convertParams<IParams>({ ...defaultParams, ...rawParams });
 
     const cacheKey = `list_${!!extended}_${!!onlySecure}`;
 

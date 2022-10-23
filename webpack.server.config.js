@@ -52,6 +52,6 @@ module.exports = {
         }),
     ],
 
-    devtool: 'source-map',
+    devtool: undefined,
     stats: 'minimal',
 };

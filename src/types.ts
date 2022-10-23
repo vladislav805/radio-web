@@ -43,8 +43,8 @@ export interface ITrackResolver {
     source: string;
 }
 
-export type IApiParams<T = Record<string, string>> = T;
+export type IApiParams<T extends Record<string, string> = Record<string, string>> = T;
 
 export type IApiEndpointResult<T> = Promise<T>;
 
-export type IApiEndpoint<R, P = never> = (params: IApiParams<P | Record<string, string | string[]>>) => IApiEndpointResult<R>;
+export type IApiEndpoint<R> = (params: IApiParams) => IApiEndpointResult<R>;
