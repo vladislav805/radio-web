@@ -6,6 +6,7 @@ import type { IApiEndpoint, IStation, IStream } from '../../types';
 type IParams = {
     extended?: boolean;
     onlySecure?: boolean;
+    noReferrer?: boolean;
 };
 
 const defaultParams: IParams = {
@@ -14,7 +15,7 @@ const defaultParams: IParams = {
 };
 
 const getStations: IApiEndpoint<IStation[], IParams> = async rawParams => {
-    const { extended, onlySecure } = { ...defaultParams, ...rawParams };
+    const { extended, onlySecure, noReferrer } = { ...defaultParams, ...rawParams };
 
     const cacheKey = `list_${!!extended}_${!!onlySecure}`;
 
@@ -41,9 +42,10 @@ const getStations: IApiEndpoint<IStation[], IParams> = async rawParams => {
                 stationStreams[stream.stationId] = [];
             }
 
-            if (onlySecure && !stream.secure) return;
+            if (onlySecure && !stream.secure || noReferrer && stream.noReferrer) return;
 
             stream.secure = Boolean(stream.secure);
+            stream.noReferrer = Boolean(stream.noReferrer);
 
             stream.canResolveTrack = Boolean(stream.trackResolverId);
 

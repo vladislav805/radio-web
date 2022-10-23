@@ -10,6 +10,7 @@ import { toTimeFormat } from './utils';
 function init() {
 	apiRequest('getStations', {
 		extended: '1',
+		noReferrer: '1',
 	}).then(showStations).catch(e => {
 		alert(e);
 		console.error('Cannot start get list of radio stations', e);

@@ -11,6 +11,7 @@
         "sourceMap": true,
         "removeComments": false,
         "baseUrl": "src",
+        "importsNotUsedAsValues": "error"
     },
     "include": [
         "src/**/*"

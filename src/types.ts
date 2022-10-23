@@ -20,6 +20,7 @@ export interface IStream {
     format: 'mp3' | 'm3u8' | 'aac' | 'ogg';
     bitrate: number;
     secure: boolean;
+    noReferrer: boolean;
     cityTitle: string;
 
     // Used for external API

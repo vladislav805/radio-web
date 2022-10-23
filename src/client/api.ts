@@ -1,4 +1,4 @@
-import { IApiParams } from '../types';
+import type { IApiParams } from '../types';
 import { SERVER_PORT } from '../shared';
 
 const endpoint = process.env.NODE_ENV === 'production' ? '/' : `http://localhost:${SERVER_PORT}/`;

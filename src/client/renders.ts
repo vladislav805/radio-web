@@ -1,5 +1,4 @@
-import classNames from 'classnames';
-import { IStation, IStream } from '../types';
+import type { IStation, IStream } from '../types';
 import { e } from './dom';
 import { CLASS_STATION_ACTIVE, CLASS_STREAM_ACTIVE } from './classNames';
 
@@ -64,7 +63,3 @@ export const renderStream = (stream: IStream, { onClick, currentStream }: IRende
 
     return node;
 };
-
-
-
-

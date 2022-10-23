@@ -1,6 +1,7 @@
+import axios from 'axios';
+
 import type { IApiEndpoint, ICurrentTrack, IStream, ITrackResolver } from '../../types';
 import getStreamById from './getStreamById';
-import axios from 'axios';
 import { getValueByPath } from '../utils';
 
 type IParams = {

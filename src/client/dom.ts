@@ -1,5 +1,3 @@
-import { CLASS_STATION_ACTIVE } from './classNames';
-
 export const e = (
     tag: string,
     attrs: Record<string, string | number | boolean | (<T extends Event>(event: T) => unknown)> = null,
