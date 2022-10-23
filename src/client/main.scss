@@ -1,11 +1,11 @@
-@import 'style/reset';
-@import 'style/vars';
-@import 'style/base';
-@import 'style/header';
-@import 'style/content';
-@import 'style/list';
-@import 'style/player';
-@import 'style/settings';
+@import './style/reset';
+@import './style/vars';
+@import './style/base';
+@import './style/header';
+@import './style/content';
+@import './style/list';
+@import './style/player';
+@import './style/settings';
 
 .station__active,
 .stream__active {

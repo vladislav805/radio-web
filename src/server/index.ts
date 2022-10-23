@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express from 'express';
 import getStations from './methods/getStations';
 import getCurrentTrack from './methods/getCurrentTrack';
 import getStreamById from './methods/getStreamById';
