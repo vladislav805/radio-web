@@ -18,7 +18,7 @@ const defaultParams: IApiParams = {
 const getStations: IApiEndpoint<IStation[]> = async rawParams => {
     const { extended, onlySecure, noReferrer } = convertParams<IParams>({ ...defaultParams, ...rawParams });
 
-    const cacheKey = `list_${!!extended}_${!!onlySecure}`;
+    const cacheKey = `list_${!!extended}_${!!onlySecure}_${noReferrer}`;
 
     const cachedData = cached<IStation[]>(cacheKey);
     if (cachedData) {
