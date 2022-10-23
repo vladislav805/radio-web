@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio</title>
+    <style>
+.station {
+    padding: 8px 12px;
+}
+    </style>
+</head>
+<body>
+<script>window._stations = {{STATIONS}};</script>
+<audio id="audio" controls style="width: 100%" src="about:blank"></audio>
+<div id="list">
+    loading...
+</div>
+<script>
+    function ce(tag, attrs, events, content) {
+        var node = document.createElement(tag);
+        if (attrs) {
+            for (var key in attrs) {
+                node.setAttribute(key, attrs[key]);
+            }
+        }
+        if (events) {
+            for (var event in events) {
+                node.addEventListener(event, events[event]);
+            }
+        }
+        if (content !== undefined) {
+            var handleItem = function(item) {
+                if (typeof item === 'string') {
+                    node.innerHTML = item;
+                } else if (item instanceof HTMLElement) {
+                    node.appendChild(item);
+                }
+            };
+            handleItem(content);
+        }
+        return node;
+    }
+
+    function setCurrentStation(stream) {
+        var audio = document.getElementById('audio');
+        audio.src = stream.url;
+        audio.play();
+    }
+
+    function renderStationList(list, stations) {
+        var root = ce('div');
+        for (var i = 0; i < stations.length; ++i) {
+            var station = stations[i];
+
+            for (var j = 0; j < station.streams.length; ++j) {
+                var stream = station.streams[j];
+
+                if (stream.format !== 'mp3') continue;
+
+                var item = ce(
+                    'div',
+                    {
+                        'class': 'station'
+                    },
+                    {
+                        click: function(stream, event) {
+                            event.preventDefault();
+
+                            setCurrentStation(stream);
+                        }.bind(this, stream),
+                    },
+                    station.title + ' / ' + stream.cityTitle + ' ' + stream.bitrate + 'kbps'
+                );
+
+                root.appendChild(item);
+            }
+        }
+        list.innerHTML = '';
+        list.appendChild(root);
+    }
+
+    function main() {
+        var list = document.getElementById('list');
+        var stations = window._stations;
+
+        renderStationList(list, stations);
+    }
+
+    main();
+</script>
+</body>
+</html>
