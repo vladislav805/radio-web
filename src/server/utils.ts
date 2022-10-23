@@ -28,5 +28,5 @@ export function convertParams<T extends Record<string, any>>(params: IApiParams)
         }
     }
 
-    return params as T;
+    return props as T;
 }
