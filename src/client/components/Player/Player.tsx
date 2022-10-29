@@ -28,6 +28,7 @@ async function createAudio(stream: IStream): Promise<{ audio: HTMLAudioElement; 
     let hls: Hls | undefined;
 
     if (stream.format === 'm3u8') {
+        // lazy-module не получился
         const { default: HlsModule } = await import(/* webpackChunkName: 'hls' */ 'hls.js');
         if (HlsModule.isSupported()) {
 
