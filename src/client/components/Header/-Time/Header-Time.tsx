@@ -23,8 +23,6 @@ export const HeaderTime: React.FC = () => {
 
         const bufferChange = () => {
             if (refBuffered.current) {
-                console.log(audio.buffered)
-
                 const hasBuffer = audio.buffered.length > 0;
 
                 let text: string;

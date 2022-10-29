@@ -34,8 +34,6 @@
     }
 
     &_active {
-        // background: var(--color-stream-panel-background);
-
         &::after {
             transform: translateX(0);
         }
