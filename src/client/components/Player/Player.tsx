@@ -15,8 +15,8 @@ function getStreamUrl(stream: IStream): string {
     let url = stream.url;
 
     if (stream.secure && url.startsWith('http:')) {
-		url = url.replace('http:', 'https:');
-	}
+        url = url.replace('http:', 'https:');
+    }
 
     return url;
 }
