@@ -18,7 +18,8 @@
             "@components/*": ["src/client/components/*"],
             "@lib/*": ["src/client/lib/*"],
             "@typings": ["src/typings"],
-            "@typings/*": ["src/typings/*"]
+            "@typings/*": ["src/typings/*"],
+            "@server/*": ["src/server/*"]
         }
     }
 }

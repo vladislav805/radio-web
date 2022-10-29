@@ -1,27 +1,35 @@
 import axios from 'axios';
 
-import type { IApiEndpoint, ICurrentTrack, IStream, ITrackResolver } from '../../types';
-import getStreamById from './getStreamById';
+import type { IApiParams, ICurrentTrack, ITrackResolver, IStreamDatabase } from '@typings';
+
+import { getStreamById } from './getStreamById';
 import { convertParams, getValueByPath } from '../utils';
 
-type IParams = {
+interface IParams {
     streamId: number;
-};
+}
 
 type ITrackResolveJsonStrategy = ICurrentTrack;
 
-type ITrackResolveDynamicStrategy = {
+interface ITrackResolveDynamicStrategy {
     source: string;
-};
+}
 
-type ITrackResolveStrategy = ITrackResolveDynamicStrategy | ITrackResolveJsonStrategy;
+type ITrackResolveStrategy =
+    | ITrackResolveDynamicStrategy
+    | ITrackResolveJsonStrategy;
 
-const getCurrentTrack: IApiEndpoint<ICurrentTrack> = async props => {
+export async function getCurrentTrack(props: IApiParams): Promise<ICurrentTrack> {
     const { streamId } = convertParams<IParams>(props);
+
     const stream = await getStreamById({
         streamId: String(streamId),
         needResolver: '1',
-    }) as IStream & ITrackResolver;
+    }) as IStreamDatabase & ITrackResolver;
+
+    if (!stream.trackUrl) {
+        throw new Error();
+    }
 
     if (stream.type === 'json') {
         const strategy: ITrackResolveStrategy = JSON.parse(stream.source);
@@ -34,16 +42,16 @@ const getCurrentTrack: IApiEndpoint<ICurrentTrack> = async props => {
         return {
             artist: getValueByPath(data, paths.artist),
             title: getValueByPath(data, paths.title),
-            image: getValueByPath(data, paths.image),
+            image: paths.image ? getValueByPath(data, paths.image) : null,
         };
     } else {
         const makeRequest = (url: string) => axios.get(url, {
             responseType: 'text',
         }).then(res => res.data);
+
         const source = stream.source;
         const fx = new Function('args', source);
-        return await fx({ stream, makeRequest });
-    }
-};
 
-export default getCurrentTrack;
+        return fx({ stream, makeRequest });
+    }
+}
