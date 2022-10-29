@@ -1,13 +1,12 @@
 {
 	"name": "@vladislav805/online-radio",
 	"private": true,
-	"version": "7.3.0",
+	"version": "8.0.0",
 	"scripts": {
 		"server:dev": "ts-node src/server/index.ts",
 		"server:build": "NODE_ENV=production webpack --config ./webpack.server.config.js",
-		"client:dev": "webpack-dev-server --progress --watch",
+		"client:dev": "webpack serve --config ./webpack.client.config.js",
 		"client:build": "NODE_ENV=production webpack --config ./webpack.client.config.js",
-		"legacy:build": "cp src/server/legacy/template.html dist/template.html",
 		"build": "run-p \"client:build\" \"server:build\"",
 		"deploy": "cd dist && rsync --archive --compress . vlad805@135.181.147.70:/home/vlad805/projects/radio/"
 	},
@@ -20,8 +19,11 @@
 		"@babel/plugin-syntax-dynamic-import": "7.8.3",
 		"@babel/plugin-transform-runtime": "7.19.6",
 		"@babel/preset-env": "7.19.4",
+		"@bem-react/classname": "1.5.12",
 		"@types/express": "4.17.14",
 		"@types/node": "18.11.3",
+		"@types/react": "18.0.23",
+		"@types/react-dom": "18.0.7",
 		"@types/webpack": "5.28.0",
 		"babel-loader": "8.2.5",
 		"css-loader": "6.7.1",
@@ -47,7 +49,9 @@
 		"classnames": "2.3.2",
 		"express": "4.18.2",
 		"hls.js": "1.2.4",
-		"mysql2": "2.3.3"
+		"mysql2": "2.3.3",
+		"react": "18.2.0",
+		"react-dom": "18.2.0"
 	},
 	"author": {
 		"email": "vlad@velu.ga",

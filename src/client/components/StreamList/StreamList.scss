@@ -1,0 +1,51 @@
+@import '../SCSS/Utils.scss';
+
+.StreamList {
+    display: flex;
+    flex-flow: column nowrap;
+
+    background: var(--color-stream-panel-background);
+    box-shadow: 0 0 2px var(--color-stream-panel-shadow);
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    transform: translateY(100%);
+
+    @include desktop {
+        max-width: 0;
+
+        transition: max-width .2s ease-out;
+
+        &_show {
+            transform: translateY(0);
+            max-width: 40%;
+        }
+    }
+
+    @include phone {
+        transition: transform .2s ease-out;
+
+        &_show {
+            transform: translateY(0);
+
+            transition: transform .2s ease-in;
+        }
+    }
+
+    &-Back {
+        display: inline-flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        padding: .9rem .5rem;
+        line-height: 1.4rem;
+
+        .Icon {
+            margin-right: .4rem;
+        }
+
+        @include desktop {
+            display: none;
+        }
+    }
+}

@@ -7,30 +7,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 
 const mode = isProduction ? 'production' : 'development';
-const isLegacy = Boolean(process.env.LEGACY);
-
-const environment = isLegacy ? {
-    arrowFunction: false,
-    bigIntLiteral: false,
-    const: false,
-    destructuring: false,
-    dynamicImport: false,
-    forOf: false,
-    module: false,
-} : {};
 
 module.exports = {
     mode,
     target: 'web',
 
     entry: {
-        client: path.resolve('src', 'client', 'index.ts'),
+        client: path.resolve('src', 'client', 'index.tsx'),
     },
 
     output: {
         path: path.resolve('dist', 'client'),
         filename: '[name].js',
-        environment,
     },
 
     module: {
@@ -68,7 +56,12 @@ module.exports = {
     },
 
     resolve: {
-        extensions: [ '.tsx', '.ts', '.js' ],
+        extensions: ['.tsx', '.ts', '.js'],
+        alias: {
+            '@components': path.resolve(__dirname, 'src', 'client', 'components'),
+            '@lib': path.resolve(__dirname, 'src', 'client', 'lib'),
+            '@typings': path.resolve(__dirname, 'src', 'client', 'typings'),
+        },
     },
 
     optimization: {
@@ -93,13 +86,13 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css',
-            chunkFilename: '[id].css',
+            chunkFilename: '[name].css',
         }),
     ],
 
     devtool: isProduction ? undefined : 'source-map',
     devServer: {
-        contentBase: path.resolve('dist'),
+        static: path.resolve('html'),
         port: 8077,
     },
 

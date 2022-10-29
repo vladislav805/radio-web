@@ -1,0 +1,13 @@
+.StationList {
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none; // Firefox 64+
+
+    &::-webkit-scrollbar { // Chrome 2+, Opera 15+, Safari 4+
+        display: none;
+    }
+}

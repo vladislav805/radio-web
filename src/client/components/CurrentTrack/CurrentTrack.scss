@@ -1,0 +1,55 @@
+@import '../SCSS/Utils.scss';
+
+.CurrentTrack {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    &-Cover {
+        width: 4rem;
+        height: 4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include phone {
+            position: relative;
+        }
+    }
+
+    &-Image {
+        width: 4rem;
+        height: 4rem;
+        object-fit: cover;
+
+        transition: all .1s linear;
+
+        &:hover,
+        &:active {
+            position: absolute;
+            width: 6rem;
+            height: 6rem;
+
+            @include phone {
+                left: 0;
+                bottom: 0;
+            }
+        }
+    }
+
+    &-Info {
+        padding: 0 1rem;
+        flex: 1;
+        user-select: text;
+    }
+
+    &-Button {
+        white-space: pre;
+        margin: 0 1rem;
+        text-align: right;
+    }
+
+    &_supported &-Button {
+        margin: 0 .5rem;
+    }
+}

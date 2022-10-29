@@ -1,0 +1,45 @@
+@use 'sass:math';
+@import '../SCSS/Item-Animation.scss';
+@import '../SCSS/Utils.scss';
+
+.StationItem {
+    $height: 2.5rem;
+
+    text-align: left;
+    line-height: $height;
+    padding: 0 .75rem;
+
+    cursor: pointer;
+
+    &:hover {
+        background: var(--color-station-background__hover);
+    }
+
+    &_playing {
+        background: var(--color-station-background__active);
+    }
+
+    @include desktop {
+        &::after {
+            $arrow-size: math.div($height, 2);
+            content: '';
+            position: absolute;
+            border: $arrow-size solid transparent;
+            border-right-color: var(--color-stream-panel-background);
+            top: 0;
+            right: 0;
+            transform: translateX($arrow-size);
+            transition: transform .2s linear;
+        }
+    }
+
+    &_active {
+        // background: var(--color-stream-panel-background);
+
+        &::after {
+            transform: translateX(0);
+        }
+    }
+
+    @include item-animation(20);
+}

@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+		"jsx": "react",
         "esModuleInterop": true,
         "noImplicitAny": true,
         "lib": ["dom", "es5", "esnext"],
@@ -7,13 +8,17 @@
         "moduleResolution": "node",
         "target": "es2019",
         "allowJs": false,
-        "strict": false,
+        "strict": true,
+        "strictNullChecks": true,
         "sourceMap": true,
         "removeComments": false,
-        "baseUrl": "src",
-        "importsNotUsedAsValues": "error"
-    },
-    "include": [
-        "src/**/*"
-    ]
+        "baseUrl": ".",
+        "importsNotUsedAsValues": "error",
+        "paths": {
+            "@components/*": ["src/client/components/*"],
+            "@lib/*": ["src/client/lib/*"],
+            "@typings": ["src/typings"],
+            "@typings/*": ["src/typings/*"]
+        }
+    }
 }

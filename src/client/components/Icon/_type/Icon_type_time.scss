@@ -1,0 +1,13 @@
+.Icon_type_time {
+    animation: Icon_type_time-rotate .75s infinite ease-in-out;
+
+    @keyframes Icon_type_time-rotate {
+        50% {
+            transform: rotate(0);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

@@ -1,0 +1,31 @@
+@import '../SCSS/Item-Animation.scss';
+
+.StreamItem {
+    position: relative;
+
+    padding: .5rem 1rem;
+
+    text-align: left;
+
+    line-height: 1.4rem;
+
+    cursor: pointer;
+
+    @include item-animation(20);
+
+    &-Title {
+
+    }
+
+    &-Meta {
+        font-size: .9rem;
+    }
+
+    &:hover {
+        background: var(--color-station-background__hover);
+    }
+
+    &_active {
+        background: var(--color-station-background__active);
+    }
+}

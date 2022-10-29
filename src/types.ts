@@ -1,40 +1,9 @@
-export interface IResult<T> {
-    result: T;
-}
+import type { IStream } from '@typings';
 
-export interface IError {
-    errorCode: number;
-}
-
-export interface IStation {
-    stationId: number;
-    title: string;
-    streams?: IStream[];
-}
-
-export interface IStream {
-    streamId: number;
-    stationId: number;
-    cityId: number;
-    url: string;
-    format: 'mp3' | 'm3u8' | 'aac' | 'ogg';
-    bitrate: number;
-    secure: boolean;
-    noReferrer: boolean;
-    cityTitle: string;
-
-    // Used for external API
-    canResolveTrack?: boolean;
-
+export interface IStreamDatabase extends IStream {
     // Used for backend and has in database
     trackUrl?: string;
     trackResolverId?: number;
-}
-
-export interface ICurrentTrack {
-    artist: string;
-    title: string;
-    image?: string;
 }
 
 export interface ITrackResolver {
