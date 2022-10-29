@@ -8,6 +8,6 @@ import './legacy.scss';
 const rootElement = document.getElementById('root');
 
 if (rootElement !== null) {
-	const root = ReactDOM.createRoot(rootElement);
-	root.render(<App />);
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(<App />);
 }
