@@ -1,0 +1,61 @@
+.Range {
+    $thumb-size: 16px;
+    $track-width: 4px;
+    $track-progress: #2ecc71;
+    $track-rest: #555555;
+
+    $half-thumb-size: $thumb-size * .5;
+    $margin-fix: $half-thumb-size - $track-width * .5;
+
+    -webkit-appearance: none;
+    appearance: none;
+
+    background: transparent;
+    width: 100%;
+
+    // Thumb
+    &::-webkit-slider-thumb {
+        // Еще один недостаток в браузерах на основе WebKit и Blink заключается в том, что вы должны установить
+        // свойство -webkit-appearance: none для ползунка и для бегунка (но не для дорожки).
+        -webkit-appearance: none;
+        appearance: none;
+
+        width: $thumb-size;
+        height: $thumb-size;
+        border-radius: $half-thumb-size;
+        background: #ffffff;
+        margin-top: -$margin-fix;
+        cursor: pointer;
+        outline: none;
+    }
+
+    &::-moz-range-thumb {
+        width: $thumb-size;
+        height: $thumb-size;
+        border-radius: $half-thumb-size;
+        background: #ffffff;
+        position: absolute;
+        margin-left: -$margin-fix;
+        margin-top: -$margin-fix;
+        cursor: pointer;
+        outline: none;
+    }
+
+    // Track
+    &::-webkit-slider-runnable-track {
+        height: $track-width;
+        background: $track-rest;
+        border-radius: $track-width * .5;
+        background: linear-gradient(to right, $track-progress 0%, $track-progress var(--range-progress), $track-rest var(--range-progress), $track-rest 100%);
+    }
+
+    &::-moz-range-track {
+        height: $track-width;
+        background: $track-rest;
+        border-radius: $track-width * .5;
+    }
+
+    &::-moz-range-progress {
+        background: $track-progress;
+    }
+}

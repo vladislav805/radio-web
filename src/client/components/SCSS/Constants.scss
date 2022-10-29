@@ -1,0 +1,29 @@
+:root {
+    // Page background color
+    --color-root-background: #202225;
+
+    // App colors
+    --color-app-background: #36393f;
+    --color-app-foreground: #ffffff;
+
+    --color-header-background: #292b2f;
+    --color-header-foreground: #b9bbbe;
+
+    --color-footer-background: #2f3136;
+    --color-footer-foreground: #96989d;
+
+    --color-station-background__hover: #3f434b;
+    --color-station-background__active: #42464d;
+
+    --color-button-background: #4f545c;
+    --color-button-background__hover: #686d73;
+    --color-button-background__active: #72767d;
+    --color-button-background__disabled: #484b51;
+    --color-button-foreground: #ffffff;
+    --color-button-foreground__disabled: #727478;
+
+    --color-stream-panel-background: #2f3136;
+    --color-stream-panel-shadow: #1f2126;
+
+    --color-green: #2ecc71; /// #555
+}

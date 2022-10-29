@@ -1,0 +1,21 @@
+.Header-Time {
+    line-height: 1.5rem;
+
+    &-Row {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: end;
+    }
+
+    &-Label {
+        font-size: .8rem;
+    }
+
+    &-Value {
+
+    }
+
+    &-Label + &-Value {
+        margin-left: .4rem;
+    }
+}

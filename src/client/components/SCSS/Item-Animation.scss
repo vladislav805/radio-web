@@ -1,0 +1,29 @@
+@mixin item-animation($animated-count) {
+    opacity: 0;
+
+    @for $i from 1 to $animated-count {
+        &:nth-child(#{$i}) {
+            animation: station-item .1s ease-in forwards #{$i * 40ms} 1;
+        }
+    }
+
+    &:nth-child(n + #{$animated-count}) {
+        @include __final-state;
+    }
+
+    @keyframes station-item {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            @include __final-state;
+        }
+    }
+}
+
+@mixin __final-state {
+    opacity: 1;
+    transform: translateY(0);
+}

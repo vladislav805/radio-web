@@ -1,0 +1,28 @@
+@import '../SCSS/Utils.scss';
+
+.Content {
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    @include desktop {
+        display: flex;
+        flex-flow: row nowrap;
+
+        .StationList,
+        .StreamList {
+            flex: 1;
+        }
+    }
+
+    @include phone {
+        position: relative;
+
+        .StreamList {
+            top: 0;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
