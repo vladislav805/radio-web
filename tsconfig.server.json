@@ -1,8 +1,9 @@
 {
+    "extends": "./tsconfig.json",
     "compilerOptions": {
         "module": "commonjs",
         "esModuleInterop": true,
-        "target": "ES6",
+        "target": "esnext",
         "allowJs": true,
         "sourceMap": false,
         "outDir": "dist",

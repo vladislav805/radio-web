@@ -57,7 +57,7 @@ export const CurrentTrack: React.FC<ICurrentTrackProps> = ({ station, stream }) 
     return (
         <div className={cnCurrentTrack({ busy, supported })}>
             <div className={currentTrackCoverCn}>
-                {info?.image !== undefined ? (
+                {info?.image ? (
                     <img
                         className={currentTrackImageCn}
                         src={info.image}

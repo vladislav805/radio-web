@@ -1,13 +1,15 @@
 import express from 'express';
-import getStations from './methods/getStations';
-import getCurrentTrack from './methods/getCurrentTrack';
-import getStreamById from './methods/getStreamById';
-import type { IApiEndpoint, IApiParams, IError } from '../types';
+import type { IApiParams, IError } from '@typings';
+
+import { getStations } from './apiMethods/getStations';
+import { getCurrentTrack } from './apiMethods/getCurrentTrack';
+import { getStreamById } from './apiMethods/getStreamById';
+
 import { SERVER_PORT } from '../shared';
 
 const service = express();
 
-const methods: Record<string, IApiEndpoint<any>> = {
+const methods: Record<string, (params: IApiParams) => unknown> = {
     getStations,
     getCurrentTrack,
     getStreamById,
@@ -17,16 +19,25 @@ service.all('/api/:method', async(req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
     const methodName = req.params.method;
+    let response: any;
 
     if (methodName in methods) {
-        const result = await methods[methodName](req.query as IApiParams);
-
-        res.send({ result });
+        try {
+            response = {
+                result: await methods[methodName](req.query as IApiParams)
+            };
+        } catch (e) {
+            response = {
+                error: e && e instanceof Error ? e.message : 'Unknown error',
+            };
+        }
     } else {
         const error: IError = { errorCode: 4 };
 
-        res.send({ error });
+        response = { error };
     }
+
+    res.send(response);
 });
 
 service.listen(SERVER_PORT, () => console.log('Server started'));
