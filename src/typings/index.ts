@@ -5,4 +5,3 @@ export * from './IResult';
 export * from './IStation';
 export * from './IStream';
 export * from './IStreamDatabase';
-export * from './ITrackResolver';

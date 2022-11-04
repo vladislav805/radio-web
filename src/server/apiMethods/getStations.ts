@@ -43,6 +43,7 @@ export async function getStations(rawParams: IApiParams): Promise<IStation[]> {
             const [streams] = await connect.execute<RowDataPacket[]>(sql);
 
             const stationStreams: Record<number, IStream[]> = {};
+
             (Array.from(streams) as IStreamDatabase[]).forEach(stream => {
                 if (!(stream.stationId in stationStreams)) {
                     stationStreams[stream.stationId] = [];
@@ -50,14 +51,18 @@ export async function getStations(rawParams: IApiParams): Promise<IStation[]> {
 
                 if (onlySecure && !stream.secure || noReferrer && stream.noReferrer) return;
 
-                stream.secure = Boolean(stream.secure);
-                stream.noReferrer = Boolean(stream.noReferrer);
-                stream.canResolveTrack = Boolean(stream.trackResolverId);
-
-                stream.trackResolverId = undefined;
-                stream.trackUrl = undefined;
-
-                stationStreams[stream.stationId].push(stream);
+                stationStreams[stream.stationId].push({
+                    streamId: stream.streamId,
+                    stationId: stream.stationId,
+                    url: stream.url,
+                    format: stream.format,
+                    bitrate: stream.bitrate,
+                    cityId: stream.cityId,
+                    cityTitle: stream.cityTitle,
+                    noReferrer: Boolean(stream.noReferrer),
+                    secure: Boolean(stream.secure),
+                    canResolveTrack: Boolean(stream.resolver),
+                });
             });
 
             result = result.map(station => {

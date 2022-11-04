@@ -4,10 +4,8 @@
         "module": "commonjs",
         "esModuleInterop": true,
         "target": "esnext",
-        "allowJs": true,
         "sourceMap": false,
         "outDir": "dist",
-        "baseUrl": ".",
         "lib": [
             "es5",
             "es2015.promise",
@@ -15,8 +13,7 @@
         ]
     },
     "include": [
-        "src/server/**/*",
-        "src/shared.ts",
-        "src/types.ts"
+        "src/server/*",
+        "src/server/**/*"
     ]
 }

@@ -2,9 +2,6 @@ import type { IApiParams } from '@typings';
 
 export const getUnixTime = (): number => (Date.now() / 1000) | 0;
 
-// @ts-ignore
-export const getValueByPath = <T>(obj: object, path: string): T => path?.split('.').reduce((acc, c) => acc?.[c], obj) ?? undefined;
-
 export function convertParams<T extends Record<string, any>>(params: IApiParams): T {
     const props = {} as T;
     let key: keyof T;

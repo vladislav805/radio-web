@@ -23,9 +23,6 @@ module.exports = {
                 test: /\.tsx?$/,
                 use: [
                     {
-                        loader: 'babel-loader',
-                    },
-                    {
                         loader: 'ts-loader',
                         options: {
                             configFile: 'tsconfig.server.json',
@@ -40,6 +37,10 @@ module.exports = {
     resolve: {
         extensions: [ '.tsx', '.ts', '.js', '.mjs' ],
         modules: ['node_modules', '.'],
+        alias: {
+            '@server': path.resolve('src', 'server'),
+            '@typings': path.resolve('src', 'typings'),
+        },
     },
 
     plugins: [
@@ -52,6 +53,6 @@ module.exports = {
         }),
     ],
 
-    devtool: undefined,
+    devtool: false,
     stats: 'minimal',
 };

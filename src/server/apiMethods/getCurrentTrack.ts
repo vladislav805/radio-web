@@ -1,23 +1,13 @@
-import axios from 'axios';
+import type { IApiParams, ICurrentTrack } from '@typings';
 
-import type { IApiParams, ICurrentTrack, ITrackResolver, IStreamDatabase } from '@typings';
+import { resolversRegistry } from '../resolvers/.registry';
 
 import { getStreamById } from './getStreamById';
-import { convertParams, getValueByPath } from '../utils';
+import { convertParams } from '../utils';
 
 interface IParams {
     streamId: number;
 }
-
-type ITrackResolveJsonStrategy = ICurrentTrack;
-
-interface ITrackResolveDynamicStrategy {
-    source: string;
-}
-
-type ITrackResolveStrategy =
-    | ITrackResolveDynamicStrategy
-    | ITrackResolveJsonStrategy;
 
 export async function getCurrentTrack(props: IApiParams): Promise<ICurrentTrack> {
     const { streamId } = convertParams<IParams>(props);
@@ -25,33 +15,29 @@ export async function getCurrentTrack(props: IApiParams): Promise<ICurrentTrack>
     const stream = await getStreamById({
         streamId: String(streamId),
         needResolver: '1',
-    }) as IStreamDatabase & ITrackResolver;
+    });
 
-    if (!stream.trackUrl) {
-        throw new Error();
+    if (!stream) {
+        throw new Error('Stream not found');
     }
 
-    if (stream.type === 'json') {
-        const strategy: ITrackResolveStrategy = JSON.parse(stream.source);
-        const { data } = await axios.get(stream.trackUrl, {
-            responseType: 'json',
-        });
-
-        const paths = strategy as ITrackResolveJsonStrategy;
-
-        return {
-            artist: getValueByPath(data, paths.artist),
-            title: getValueByPath(data, paths.title),
-            image: paths.image ? getValueByPath(data, paths.image) : null,
-        };
-    } else {
-        const makeRequest = (url: string) => axios.get(url, {
-            responseType: 'text',
-        }).then(res => res.data);
-
-        const source = stream.source;
-        const fx = new Function('args', source);
-
-        return fx({ stream, makeRequest });
+    if (!stream.trackUrl || !stream.resolver) {
+        throw new Error('This stream do not support resolving current track');
     }
+
+    const ResolverCtr = resolversRegistry.get(stream.resolver);
+
+    if (!ResolverCtr) {
+        throw new Error('This stream do not support resolving current track (2)');
+    }
+
+    const resolver = new ResolverCtr(stream);
+
+    const track = await resolver.get();
+
+    if (track === undefined) {
+        throw new Error('Track unavailable');
+    }
+
+    return track;
 }
