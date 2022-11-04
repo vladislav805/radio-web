@@ -31,7 +31,7 @@ export class PiterFmResolver extends Resolver<IPiterFmRaw> {
 
         const startDate = new Date(`${track.startdate}T${track.starttime}+03:00`);
 
-        const endTime = Number(startDate) + this.parseDuration(track.duration);
+        const endTime = Math.floor(Number(startDate) / 1000) + this.parseDuration(track.duration);
 
         return {
             artist: track.artist,
