@@ -15,7 +15,7 @@ interface IPiterFmRaw {
     }[];
 }
 export class PiterFmResolver extends Resolver<IPiterFmRaw> {
-    public override transform(result: IPiterFmRaw): ICurrentTrack | undefined {
+    protected override transform(result: IPiterFmRaw): ICurrentTrack | undefined {
         if (result.adnow) {
             return {
                 artist: 'Питер FM',

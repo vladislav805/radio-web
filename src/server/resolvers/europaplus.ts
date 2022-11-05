@@ -35,7 +35,7 @@ interface IEuropaPlusRaw {
 }
 
 export class EmgEuropaPlusResolver extends Resolver<IEuropaPlusRaw> {
-    public transform(result: IEuropaPlusRaw): ICurrentTrack | undefined {
+    protected transform(result: IEuropaPlusRaw): ICurrentTrack | undefined {
         const track = result.data[0];
 
         if (!track) return undefined;

@@ -23,7 +23,7 @@ interface IDfmArguments {
 }
 
 export class DfmResolver extends Resolver<IDfmRaw, IDfmArguments> {
-    public override transform(result: IDfmRaw, args: IDfmArguments): ICurrentTrack | undefined {
+    protected override transform(result: IDfmRaw, args: IDfmArguments): ICurrentTrack | undefined {
         if (!args || !args.id) return undefined;
 
         const stream = result[args.id];

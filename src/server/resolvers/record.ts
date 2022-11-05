@@ -29,7 +29,7 @@ interface IRecordResolverArguments {
 const DEFAULT_IMAGE = 'DefaultTrack';
 
 export class RecordResolver extends Resolver<IRecordRaw, IRecordResolverArguments> {
-    public override transform(result: IRecordRaw, args: IRecordResolverArguments): ICurrentTrack | undefined {
+    protected override transform(result: IRecordRaw, args: IRecordResolverArguments): ICurrentTrack | undefined {
         if (!args || !args.id) return undefined;
 
         const targetId = args.id;

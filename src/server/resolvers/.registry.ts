@@ -1,5 +1,6 @@
 import type { IResolverCtr } from '../Resolver';
 import { DfmResolver } from './dfm';
+import { DorozhnoeResolver } from './dorozhnoe';
 import { Emg7Resolver } from './emg_7';
 import { EmgRetroResolver } from './emg_retro';
 import { EmgEuropaPlusResolver } from './europaplus';
@@ -14,3 +15,4 @@ resolversRegistry.set('emg/europa', EmgEuropaPlusResolver);
 resolversRegistry.set('emg/7', Emg7Resolver);
 resolversRegistry.set('dfm', DfmResolver);
 resolversRegistry.set('piter', PiterFmResolver);
+resolversRegistry.set('dorozhnoe', DorozhnoeResolver);

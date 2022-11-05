@@ -14,7 +14,7 @@ type IRetroRaw = {
 }[];
 
 export class EmgRetroResolver extends Resolver<IRetroRaw> {
-    public override transform(result: IRetroRaw): ICurrentTrack | undefined {
+    protected override transform(result: IRetroRaw): ICurrentTrack | undefined {
         const track = result[0];
 
         if (!track) return undefined;

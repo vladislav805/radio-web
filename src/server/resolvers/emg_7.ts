@@ -33,7 +33,7 @@ interface IEmg7Raw {
 }
 
 export class Emg7Resolver extends Resolver<IEmg7Raw> {
-    public override transform(result: IEmg7Raw): ICurrentTrack | undefined {
+    protected override transform(result: IEmg7Raw): ICurrentTrack | undefined {
         const track = result.playlist?.[0];
 
         if (!track) return undefined;

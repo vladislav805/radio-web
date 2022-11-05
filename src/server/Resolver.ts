@@ -16,12 +16,12 @@ export abstract class Resolver<Raw extends object, ResolverArgument = never> {
      * Трансформация ответа от сайта радиостанции или другого источника к единому формату ICurrentTrack.
      * При отсутствии данных необходимо вернуть undefined.
      */
-    public abstract transform(result: Raw, args: ResolverArgument | undefined): ICurrentTrack | undefined;
+    protected abstract transform(result: Raw, args: ResolverArgument | undefined): ICurrentTrack | undefined;
 
     /**
      * Получение информации от сайта радиостанции или другого источника. По умолчанию ожидаем JSON.
      */
-    protected async fetch(): Promise<Raw> {
+    protected async fetch(_args: ResolverArgument | undefined): Promise<Raw | undefined> {
         const { data } = await axios.get(this.stream.trackUrl as string, {
             responseType: 'json',
         });
@@ -36,11 +36,13 @@ export abstract class Resolver<Raw extends object, ResolverArgument = never> {
         if (!this.stream.trackUrl) return undefined;
 
         try {
-            const rawResult = await this.fetch();
-
             const args = this.stream.resolverArguments
                 ? JSON.parse(this.stream.resolverArguments) as ResolverArgument
                 : undefined;
+
+            const rawResult = await this.fetch(args);
+
+            if (!rawResult) return undefined;
 
             return this.transform(rawResult, args);
         } catch (e) {

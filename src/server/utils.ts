@@ -2,6 +2,10 @@ import type { IApiParams } from '@typings';
 
 export const getUnixTime = (): number => (Date.now() / 1000) | 0;
 
+export function leadZero(value: number, length = 2): string {
+    return `${'0'.repeat(length)}${value}`.substr(-length);
+}
+
 export function convertParams<T extends Record<string, any>>(params: IApiParams): T {
     const props = {} as T;
     let key: keyof T;
