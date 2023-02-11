@@ -1,7 +1,8 @@
-import { Resolver } from '@server/Resolver';
 import type { ICurrentTrack } from '@typings';
 
-type IRetroRaw = {
+import { Resolver } from '../Resolver';
+
+export type IRetroRaw = {
     id: string; // int
     name: string;
     artist: string; // html!
@@ -19,7 +20,7 @@ export class EmgRetroResolver extends Resolver<IRetroRaw> {
 
         if (!track) return undefined;
 
-        const endTime = Number(track.start) - Number(track.duration);
+        const endTime = Number(track.start) + Number(track.duration);
 
         return {
             artist: track.artist_txt,

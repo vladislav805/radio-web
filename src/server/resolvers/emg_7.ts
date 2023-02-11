@@ -1,7 +1,8 @@
-import { Resolver } from '@server/Resolver';
 import type { ICurrentTrack } from '@typings';
 
-interface IEmg7Raw {
+import { Resolver } from '../Resolver';
+
+export interface IEmg7Raw {
     playlist: {
         id: number,
         dbid: number;

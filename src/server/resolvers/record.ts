@@ -1,7 +1,8 @@
-import { Resolver } from '@server/Resolver';
 import type { ICurrentTrack } from '@typings';
 
-interface IRecordRaw {
+import { Resolver } from '../Resolver';
+
+export interface IRecordRaw {
     result: {
         id: number;
         track: {
@@ -17,7 +18,7 @@ interface IRecordRaw {
             noFav: boolean;
             noShow: boolean;
             shareUrl: string;
-        }
+        };
     }[];
 }
 

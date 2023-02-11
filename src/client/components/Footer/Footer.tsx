@@ -1,5 +1,5 @@
 import { CurrentTrack } from '@components/CurrentTrack';
-import type { ICurrentTrack, IStation, IStream } from '@typings';
+import type { IStation, IStream } from '@typings';
 import * as React from 'react';
 
 import { footerCn } from './Footer.const';

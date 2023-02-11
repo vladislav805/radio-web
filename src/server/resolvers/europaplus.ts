@@ -1,7 +1,8 @@
-import { Resolver } from '@server/Resolver';
 import type { ICurrentTrack } from '@typings';
 
-interface IEuropaPlusRaw {
+import { Resolver } from '../Resolver';
+
+export interface IEuropaPlusRaw {
     data: {
         id: number;
         raw?: {
@@ -46,7 +47,7 @@ export class EmgEuropaPlusResolver extends Resolver<IEuropaPlusRaw> {
         return {
             artist: track.raw?.artist ?? track.artists.map(a => a.artist).join(', '),
             title: track.raw?.name ?? track.name,
-            image: track.image,
+            image: track.image ?? null,
             endTime,
         };
     }

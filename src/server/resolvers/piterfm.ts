@@ -1,7 +1,8 @@
-import { Resolver } from '@server/Resolver';
 import type { ICurrentTrack } from '@typings';
 
-interface IPiterFmRaw {
+import { Resolver } from '../Resolver';
+
+export interface IPiterFmRaw {
     adnow: number;
     msItem: string;
     items: {
@@ -10,10 +11,11 @@ interface IPiterFmRaw {
         duration: string; // 00:04:11
         startdate: string; // 2022-11-05
         starttime: string; // 01:33:20
-        imgsmall: string;
-        imglarge: string;
+        imgsmall?: string;
+        imglarge?: string;
     }[];
 }
+
 export class PiterFmResolver extends Resolver<IPiterFmRaw> {
     protected override transform(result: IPiterFmRaw): ICurrentTrack | undefined {
         if (result.adnow) {
@@ -36,7 +38,7 @@ export class PiterFmResolver extends Resolver<IPiterFmRaw> {
         return {
             artist: track.artist,
             title: track.track,
-            image: track.imglarge ?? track.imgsmall,
+            image: track.imglarge ?? track.imgsmall ?? null,
             endTime,
         };
     }

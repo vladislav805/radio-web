@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { Resolver } from '@server/Resolver';
-import { leadZero } from '../utils';
+import { leadZero } from '../../lib/leadZero';
 import type { ICurrentTrack } from '@typings';
 
 interface IDorozhnoeRaw {

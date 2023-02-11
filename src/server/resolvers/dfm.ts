@@ -1,7 +1,8 @@
-import { Resolver } from '../Resolver';
 import type { ICurrentTrack } from '@typings';
 
-interface IDfmRaw {
+import { Resolver } from '../Resolver';
+
+export interface IDfmRaw {
     [key: string]: {
         current_track: {
             id: string;
@@ -18,7 +19,7 @@ interface IDfmRaw {
     }
 }
 
-interface IDfmArguments {
+export interface IDfmArguments {
     id: string;
 }
 

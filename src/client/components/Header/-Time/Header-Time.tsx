@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { RadioContext } from '@components/PlayerContext/PlayerContext';
-import { toTimeFormat } from '@lib/toTimeFormat';
+import { toTimeFormat } from '../../../../lib/toTimeFormat';
 
 import { headerTimeCn, headerTimeLabelCn, headerTimeRowBufferedCn, headerTimeRowPlayedCn, headerTimeValueCn } from './Header-Time.const';
 

@@ -2,7 +2,7 @@ import type { Connection } from 'mysql2/promise';
 
 import type { IApiParams, IStreamDatabase } from '@typings';
 
-import { convertParams } from '../utils';
+import { convertParams } from '../../lib/convertParams';
 import { getConnection } from '../db';
 
 interface IParams {

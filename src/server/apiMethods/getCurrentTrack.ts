@@ -2,8 +2,8 @@ import type { IApiParams, ICurrentTrack } from '@typings';
 
 import { resolversRegistry } from '../resolvers/.registry';
 
+import { convertParams } from '../../lib/convertParams';
 import { getStreamById } from './getStreamById';
-import { convertParams } from '../utils';
 
 interface IParams {
     streamId: number;

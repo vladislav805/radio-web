@@ -1,11 +1,5 @@
 import type { IApiParams } from '@typings';
 
-export const getUnixTime = (): number => (Date.now() / 1000) | 0;
-
-export function leadZero(value: number, length = 2): string {
-    return `${'0'.repeat(length)}${value}`.substr(-length);
-}
-
 export function convertParams<T extends Record<string, any>>(params: IApiParams): T {
     const props = {} as T;
     let key: keyof T;
@@ -15,10 +9,10 @@ export function convertParams<T extends Record<string, any>>(params: IApiParams)
 
         const value = params[key as string];
 
-        const isTrue = value === '1' || value === 'true';
-        const isFalse = !isTrue && (value === '0' || value === 'false');
+        const isTrue = value === 'true';
+        const isFalse = !isTrue && value === 'false';
 
-        const isNumber = Number.isNaN(Number(value)) === false;
+        const isNumber = value !== '' && Number.isNaN(Number(value)) === false;
 
         if (isNumber) {
             props[key] = Number(value) as P;

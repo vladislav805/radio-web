@@ -2,9 +2,9 @@ import type { Connection, RowDataPacket } from 'mysql2/promise';
 
 import type { IApiParams, IStation, IStream, IStreamDatabase } from '@typings';
 
-import { cache, cached } from '../caching';
+import { getCachedValue, pushCache } from '../../lib/mapCache';
 import { getConnection } from '../db';
-import { convertParams } from '../utils';
+import { convertParams } from '../../lib/convertParams';
 
 interface IParams {
     extended?: boolean;
@@ -22,7 +22,8 @@ export async function getStations(rawParams: IApiParams): Promise<IStation[]> {
 
     const cacheKey = `list_${!!extended}_${!!onlySecure}_${noReferrer}`;
 
-    const cachedData = cached<IStation[]>(cacheKey);
+    const cachedData = getCachedValue<IStation[]>(cacheKey);
+
     if (cachedData) {
         return cachedData;
     }
@@ -71,7 +72,7 @@ export async function getStations(rawParams: IApiParams): Promise<IStation[]> {
             }).filter(station => station.streams?.length);
         }
 
-        cache(cacheKey, result, 10);
+        pushCache(cacheKey, result, 10);
 
         return result;
     } catch (e) {

@@ -2,6 +2,8 @@ import axios from 'axios';
 
 import type { ICurrentTrack, IStreamDatabase } from '@typings';
 
+export type TResolverFetch = (args: any | undefined) => Promise<any | undefined>;
+
 export abstract class Resolver<Raw extends object, ResolverArgument = never> {
     /**
      * @param stream Стрим, информацию о текущем треке которого необходимо получить
