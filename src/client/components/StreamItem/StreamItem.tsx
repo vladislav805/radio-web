@@ -24,7 +24,7 @@ export const StreamItem: React.FC<IStreamItemProps> = ({ stream, active, onClick
             className={cnStreamItem({ active })}
             onClick={onClickLocal}
         >
-            <div className={streamItemTitleCn}>{stream.cityTitle}</div>
+            <div className={streamItemTitleCn}>{stream.flag} {stream.cityTitle}</div>
             <div className={streamItemMetaCn}>{stream.format}, {stream.bitrate} kbps</div>
         </Button>
     );

@@ -39,7 +39,7 @@ export async function getStations(rawParams: IApiParams): Promise<IStation[]> {
         if (extended) {
             const stationIds = result.map(station => station.stationId);
 
-            const sql = `select \`stream\`.*, \`city\`.\`title\` as \`cityTitle\` from \`stream\` left join \`city\` on \`city\`.\`cityId\` = \`stream\`.\`cityId\` where \`stationId\` in (${stationIds.join(',')})`;
+            const sql = `select \`stream\`.*, \`city\`.\`title\` as \`cityTitle\`, \`city\`.\`flag\` from \`stream\` left join \`city\` on \`city\`.\`cityId\` = \`stream\`.\`cityId\` where \`stationId\` in (${stationIds.join(',')})`;
 
             const [streams] = await connect.execute<RowDataPacket[]>(sql);
 
@@ -63,6 +63,7 @@ export async function getStations(rawParams: IApiParams): Promise<IStation[]> {
                     noReferrer: Boolean(stream.noReferrer),
                     secure: Boolean(stream.secure),
                     canResolveTrack: Boolean(stream.resolver),
+                    flag: stream.flag,
                 });
             });
 

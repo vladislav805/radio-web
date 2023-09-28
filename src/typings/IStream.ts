@@ -8,6 +8,7 @@ export interface IStream {
     secure: boolean;
     noReferrer: boolean;
     cityTitle: string;
+    flag: string;
 
     // Used for external API
     canResolveTrack?: boolean;
