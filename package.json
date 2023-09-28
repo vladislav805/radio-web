@@ -8,7 +8,8 @@
 		"client:dev": "webpack serve --config ./webpack.client.config.js",
 		"client:build": "NODE_ENV=production webpack --config ./webpack.client.config.js",
 		"build": "run-p \"client:build\" \"server:build\"",
-		"deploy": "cd dist && rsync --archive --compress . vlad805@135.181.147.70:/home/vlad805/projects/radio/"
+		"deploy": "cd dist && rsync --archive --compress . vlad805@135.181.147.70:/home/vlad805/projects/radio/",
+		"test": "jest"
 	},
 	"devDependencies": {
 		"@babel/core": "7.23.0",
