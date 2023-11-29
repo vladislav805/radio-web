@@ -24,24 +24,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
-                use: [
-                    {
-                        loader: 'ts-loader',
-                        options: {
-                            configFile: 'tsconfig.client.json',
-                        },
-                    },
-                ],
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.js$/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                    },
-                ],
+                test: /\.[jt]sx?$/,
+                use: 'swc-loader',
                 exclude: /node_modules/,
             },
             {
