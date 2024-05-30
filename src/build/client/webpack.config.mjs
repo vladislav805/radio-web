@@ -1,23 +1,27 @@
-const path = require('path');
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import { resolve } from 'path';
+
+import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
+import { Paths } from '../paths.mjs';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 const mode = isProduction ? 'production' : 'development';
 
-module.exports = {
+/** @type {import('webpack').Configuration} */
+export const config = {
     mode,
     target: 'web',
 
     entry: {
-        client: path.resolve('src', 'client', 'index.tsx'),
+        client: resolve(Paths.src, 'client', 'index.tsx'),
     },
 
     output: {
-        path: path.resolve('dist', 'client'),
+        path: Paths.dist,
         filename: '[name].js',
     },
 
@@ -42,9 +46,9 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
         alias: {
-            '@components': path.resolve(__dirname, 'src', 'client', 'components'),
-            '@lib': path.resolve(__dirname, 'src', 'client', 'lib'),
-            '@typings': path.resolve(__dirname, 'src', 'client', 'typings'),
+            '@components': resolve(Paths.src, 'client', 'components'),
+            '@lib': resolve(Paths.src, 'client', 'lib'),
+            '@typings': resolve(Paths.src, 'client', 'typings'),
         },
     },
 
@@ -65,7 +69,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: path.resolve('html', 'index.html'),
+            template: resolve(Paths.root, 'html', 'index.html'),
             minify: true,
         }),
         new MiniCssExtractPlugin({
@@ -75,8 +79,9 @@ module.exports = {
     ],
 
     devtool: isProduction ? undefined : 'source-map',
+
     devServer: {
-        static: path.resolve('html'),
+        static: resolve(Paths.root, 'html'),
         port: 8077,
     },
 

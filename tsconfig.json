@@ -4,7 +4,7 @@
         "esModuleInterop": true,
         "noImplicitAny": true,
         "lib": ["dom", "es5", "esnext"],
-        "module": "CommonJS",
+        "module": "ES6",
         "moduleResolution": "node",
         "target": "es2019",
         "allowJs": false,
@@ -13,7 +13,7 @@
         "sourceMap": true,
         "removeComments": false,
         "baseUrl": ".",
-        "importsNotUsedAsValues": "error",
+        "verbatimModuleSyntax": true,
         "paths": {
             "@components/*": ["src/client/components/*"],
             "@lib/*": ["src/client/lib/*"],
