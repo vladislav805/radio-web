@@ -1,6 +1,6 @@
 import type { IStreamDatabase } from '@typings';
 
-import { IEuropaPlusRaw, EmgEuropaPlusResolver } from './europaplus';
+import { type IEuropaPlusRaw, EmgEuropaPlusResolver } from './europaplus';
 
 describe('resolvers/europaplus', () => {
     let stream: IStreamDatabase;

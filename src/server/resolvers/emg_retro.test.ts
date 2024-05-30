@@ -1,6 +1,6 @@
 import type { IStreamDatabase } from '@typings';
 
-import { IRetroRaw, EmgRetroResolver } from './emg_retro';
+import { type IRetroRaw, EmgRetroResolver } from './emg_retro';
 
 describe('resolvers/emg_retro', () => {
     let stream: IStreamDatabase;

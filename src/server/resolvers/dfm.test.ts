@@ -1,7 +1,6 @@
-import type { TResolverFetch } from '@server/Resolver';
 import type { IStreamDatabase } from '@typings';
 
-import { DfmResolver, IDfmRaw } from './dfm';
+import { type IDfmRaw, DfmResolver } from './dfm';
 
 describe('resolvers/dfm', () => {
     let stream: IStreamDatabase;

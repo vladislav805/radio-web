@@ -1,6 +1,6 @@
 import type { IStreamDatabase } from '@typings';
 
-import { IRecordRaw, RecordResolver } from './record';
+import { type IRecordRaw, RecordResolver } from './record';
 
 describe('resolvers/record', () => {
     let stream: IStreamDatabase;
