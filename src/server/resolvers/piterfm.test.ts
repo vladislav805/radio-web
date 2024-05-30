@@ -1,6 +1,6 @@
 import type { IStreamDatabase } from '@typings';
 
-import { IPiterFmRaw, PiterFmResolver } from './piterfm';
+import { type IPiterFmRaw, PiterFmResolver } from './piterfm';
 
 describe('resolvers/piterfm', () => {
     let stream: IStreamDatabase;

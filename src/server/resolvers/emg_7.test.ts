@@ -1,6 +1,6 @@
 import type { IStreamDatabase } from '@typings';
 
-import { IEmg7Raw, Emg7Resolver } from './emg_7';
+import { type IEmg7Raw, Emg7Resolver } from './emg_7';
 
 describe('resolvers/emg_7', () => {
     let stream: IStreamDatabase;
