@@ -7,7 +7,7 @@ import { getStreamById } from './apiMethods/getStreamById';
 
 import { SERVER_PORT } from '../shared';
 
-const service = express();
+export const service = express();
 
 const methods: Record<string, (params: IApiParams) => unknown> = {
     getStations,
@@ -40,4 +40,4 @@ service.all('/api/:method', async(req, res) => {
     res.send(response);
 });
 
-service.listen(SERVER_PORT, () => console.log('Server started'));
+service.listen(SERVER_PORT, () => console.log(`Server started: http://localhost:${SERVER_PORT}/`));
