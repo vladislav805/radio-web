@@ -8,7 +8,7 @@
 		"build:server:production": "NODE_ENV=production npm run build:server",
 		"build:client": "node src/build/client/build.mjs",
 		"build:client:production": "NODE_ENV=production npm run build:client",
-		"build": "run-p \"build:client\" \"build:client\"",
+		"build": "run-p \"build:client\" \"build:server\"",
 		"build:production": "run-p \"build:client:production\" \"build:server:production\"",
 		"deploy": "cd dist && rsync --archive --compress . vlad805@135.181.147.70:/home/vlad805/projects/radio/",
 		"test": "jest"
