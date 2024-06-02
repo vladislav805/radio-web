@@ -20,6 +20,6 @@ jobs:
       - run: chmod 600 "$HOME/.ssh/key"
       # Build
       - run: npm ci
-      - run: npm run build
+      - run: npm run build:production
       # Deploy
       - run: cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress . vlad805@135.181.147.70:/home/vlad805/projects/radio/
