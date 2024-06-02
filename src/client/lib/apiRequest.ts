@@ -1,4 +1,4 @@
-const endpoint = process.env.NODE_ENV === 'production' ? './' : `https://radio.velu.ga/`;
+const endpoint = process.env.NODE_ENV === 'production' ? './' : `https://radio.veluga.dev/`;
 
 export async function apiRequest<T>(method: string, params: Record<string, string>): Promise<T> {
     const strParams = new URLSearchParams(params).toString();
