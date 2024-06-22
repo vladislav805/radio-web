@@ -97,4 +97,12 @@ export class DorozhnoeResolver extends Resolver<IDorozhnoeRaw, IDorozhnoeArgumen
 
         return res[1].replace(/<a href="[^"]+">([^<]+)<\/a>/img, '$1');
     }
+
+    protected override destruct() {
+        super.destruct();
+
+        DorozhnoeResolver.RE_IMAGE.lastIndex = 0;
+        DorozhnoeResolver.RE_ARTIST.lastIndex = 0;
+        DorozhnoeResolver.RE_TITLE.lastIndex = 0;
+    }
 }

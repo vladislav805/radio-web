@@ -49,7 +49,12 @@ export abstract class Resolver<Raw extends object, ResolverArgument = never> {
             return this.transform(rawResult, args);
         } catch (e) {
             return undefined;
+        } finally {
+            this.destruct();
         }
+    }
+
+    protected destruct(): void {
 
     }
 }
