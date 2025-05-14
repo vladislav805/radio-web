@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { cnIcon } from './Icon.const';
-import { iconRegistry, IconType } from './Icon.registry';
+import { iconRegistry, type IconType } from './Icon.registry';
 
 import './Icon.scss';
 
