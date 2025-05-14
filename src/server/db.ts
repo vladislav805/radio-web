@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-let connection: mysql.Connection;
+let connection: mysql.Connection | undefined;
 
 export const getConnection = (): Promise<mysql.Connection> => connection
     ? Promise.resolve(connection)

@@ -11,7 +11,8 @@
 		"build": "run-p \"build:client\" \"build:server\"",
 		"build:production": "run-p \"build:client:production\" \"build:server:production\"",
 		"deploy": "cd dist && rsync --archive --compress . vlad805@135.181.147.70:/home/vlad805/projects/radio/",
-		"test": "jest"
+		"test": "jest",
+		"typechecking": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@bem-react/classname": "1.6.0",

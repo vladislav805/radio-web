@@ -52,8 +52,8 @@ async function createAudio(stream: IStream): Promise<{ audio: HTMLAudioElement; 
 
 export const Player: React.FC<IPlayerProps> = ({ stream }) => {
     const { dispatch, state: playerState } = React.useContext(RadioContext);
-    const audioRef = React.useRef<HTMLAudioElement>();
-    const hlsRef = React.useRef<Hls>();
+    const audioRef = React.useRef<HTMLAudioElement>(null);
+    const hlsRef = React.useRef<Hls>(null);
 
     React.useEffect(() => {
         // Замыкания для функции коллбека-onunmount
@@ -84,7 +84,7 @@ export const Player: React.FC<IPlayerProps> = ({ stream }) => {
         return () => {
             if (hlsRef.current) {
                 hlsRef.current.destroy();
-                hlsRef.current = undefined;
+                hlsRef.current = null;
             }
 
             audioLocal.removeEventListener('waiting', onLoading);
