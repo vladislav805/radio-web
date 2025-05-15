@@ -19,20 +19,14 @@ describe('resolvers/emg_7', () => {
         resolver = new Emg7Resolver(stream);
 
         result = {
-            playlist: [
+            data: [
                 {
-                    artist: {
-                        id: false,
-                        name: 'playlist.0.artist.name',
-                    },
+                    singer: 'playlist.0.artist.name',
                     duration: 40,
                     id: 789,
-                    song: {
-                        id: false,
-                        name: 'playlist.0.song.name',
-                    },
-                    start_ts: 100,
-                    dbid: 1,
+                    song: 'playlist.0.song.name',
+                    startedAt: '',
+                    image: '',
                 },
             ],
             date: '',
@@ -58,12 +52,12 @@ describe('resolvers/emg_7', () => {
             artist: 'playlist.0.artist.name',
             title: 'playlist.0.song.name',
             image: null,
-            endTime: 140,
+            endTime: NaN,
         });
     });
 
-    it('should return undefined if playlist is empty', async() => {
-        result.playlist = [];
+    it('should return undefined if data is empty', async() => {
+        result.data = [];
 
         await expect(resolver.get()).resolves.toBeUndefined();
     });

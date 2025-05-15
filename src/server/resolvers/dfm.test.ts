@@ -14,26 +14,21 @@ describe('resolvers/dfm', () => {
         stream = {
             canResolveTrack: true,
             trackUrl: 'url',
-            resolverArguments: '{"id":"stream_1"}',
         } as IStreamDatabase;
 
         resolver = new DfmResolver(stream);
 
         result = {
-            stream_1: {
-                current_track: {
+            success: true,
+            result: {
+                status: 'Ok',
+                data: [{
                     id: 'id',
-                    name: 'name',
-                    picture: {
-                        id: 'picture.id',
-                        url_absolute: 'picture.url_absolute',
-                        url_relative: 'picture.url_relative',
-                    },
-                    song_artist: 'song_artist',
-                    song_title: 'song_title',
-                },
-                playlist: [],
-            }
+                    title: 'song_title',
+                    cover: '/picture.webp',
+                    artist: 'song_artist',
+                }],
+            },
         };
 
         // @ts-expect-error protected
@@ -50,13 +45,13 @@ describe('resolvers/dfm', () => {
         await expect(resolver.get()).resolves.toEqual({
             artist: 'song_artist',
             title: 'song_title',
-            image: 'picture.url_absolute',
+            image: 'https://dfm.ru/picture.webp',
             endTime: null,
         });
     });
 
     it('should return track without image', async() => {
-        result.stream_1.current_track.picture = null;
+        result.result.data[0].cover = '';
 
         await expect(resolver.get()).resolves.toEqual({
             artist: 'song_artist',
@@ -64,28 +59,6 @@ describe('resolvers/dfm', () => {
             image: null,
             endTime: null,
         });
-    });
-
-    it('should return undefined if requested stream not found', async() => {
-        stream.resolverArguments = '{"id":"my_stream"}';
-
-        await expect(resolver.get()).resolves.toBeUndefined();
-    });
-
-    it('should return undefined if arguments not passed', async() => {
-        stream.resolverArguments = null;
-
-        await expect(resolver.get()).resolves.toBeUndefined();
-
-        stream.resolverArguments = '';
-
-        await expect(resolver.get()).resolves.toBeUndefined();
-    });
-
-    it('should return undefined if arguments not valid', async() => {
-        stream.resolverArguments = '{]';
-
-        await expect(resolver.get()).resolves.toBeUndefined();
     });
 
     it('should return undefined if request failed', async() => {
