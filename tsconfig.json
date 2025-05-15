@@ -8,6 +8,7 @@
         "moduleResolution": "node",
         "target": "es2019",
         "allowJs": false,
+        "isolatedModules": true,
         "strict": true,
         "strictNullChecks": true,
         "sourceMap": true,
