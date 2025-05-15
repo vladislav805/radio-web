@@ -3,49 +3,45 @@ import type { ICurrentTrack } from '@typings';
 import { Resolver } from '../Resolver';
 
 export interface IEmg7Raw {
-    playlist: {
-        id: number,
-        dbid: number;
-        artist: {
-            id: number | false,
-            name: string;
-        };
-        song: {
-            id: number | false;
-            name: string;
-        };
-        start_ts: number;
-        duration: number;
-    }[];
-    online: {
-        time_start: string;
-        time_stop: string;
-        start_ts: number;
-        stop_ts: number;
-        program:{
-            title: string;
-            link: boolean;
-        };
-        staff: never[];
-        hash: string;
-    };
-    date: string;
-    ts: number;
+    data: IEmg7Track[];
+}
+
+export interface IEmg7Track {
+    id: number;
+    singer: string;
+    song: string;
+    image: string;
+    startedAt: string;
+    duration: number;
 }
 
 export class Emg7Resolver extends Resolver<IEmg7Raw> {
     protected override transform(result: IEmg7Raw): ICurrentTrack | undefined {
-        const track = result.playlist?.[0];
+        const row = result?.data?.[0];
 
-        if (!track) return undefined;
+        if (row === undefined) {
+            return undefined;
+        }
 
-        const endTime = track.start_ts + track.duration;
+        const {
+            singer: artist,
+            song: title,
+            startedAt,
+            duration,
+        } = row;
 
-        return {
-            artist: track.artist.name,
-            title: track.song.name,
-            image: null,
-            endTime,
-        };
+        const endTimeMs = new Date(startedAt).getTime() + (duration * 2) * 1000;
+
+        if (
+            title === undefined ||
+            artist === undefined
+        ) {
+            return undefined;
+        }
+
+        const image = row.image !== '' ? row.image : null;
+        const endTime = Math.floor(endTimeMs / 1000);
+
+        return { artist, title, image, endTime };
     }
 }

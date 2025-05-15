@@ -22,9 +22,11 @@ describe('resolvers/piterfm', () => {
             adnow: 0,
             msItem: '',
             items: [{
-                track: 'items.0.track',
-                artist: 'items.0.artist',
-                duration: '00:04:11',
+                track: {
+                    name: 'items.0.track',
+                    artist: { name: 'items.0.artist' },
+                    duration: '00:04:11',
+                },
                 startdate: '2022-11-05',
                 starttime: '01:33:20',
             }],
@@ -41,7 +43,7 @@ describe('resolvers/piterfm', () => {
     });
 
     it('should return track with image', async() => {
-        result.items[0].imgsmall = 'items.0.imgsmall';
+        result.items[0].track.imgsmall = 'items.0.imgsmall';
 
         await expect(resolver.get()).resolves.toEqual({
             artist: 'items.0.artist',
@@ -50,7 +52,7 @@ describe('resolvers/piterfm', () => {
             endTime: 1667601451,
         });
 
-        result.items[0].imglarge = 'items.0.imglarge';
+        result.items[0].track.imglarge = 'items.0.imglarge';
 
         await expect(resolver.get()).resolves.toEqual({
             artist: 'items.0.artist',

@@ -3,39 +3,32 @@ import type { ICurrentTrack } from '@typings';
 import { Resolver } from '../Resolver';
 
 export interface IDfmRaw {
-    [key: string]: {
-        current_track: {
-            id: string;
-            name: string;
-            picture: {
-                id: string;
-                url_absolute: string;
-                url_relative: string;
-            } | null;
-            song_artist: string;
-            song_title: string;
-        };
-        playlist: [];
-    }
+    success: boolean;
+    result: {
+        status: 'Ok';
+        data: IDfmTrack[];
+    };
 }
 
-export interface IDfmArguments {
+export interface IDfmTrack {
     id: string;
+    artist: string;
+    title: string;
+    cover: string;
 }
 
-export class DfmResolver extends Resolver<IDfmRaw, IDfmArguments> {
-    protected override transform(result: IDfmRaw, args: IDfmArguments): ICurrentTrack | undefined {
-        if (!args || !args.id) return undefined;
+export class DfmResolver extends Resolver<IDfmRaw> {
+    protected override transform(result: IDfmRaw): ICurrentTrack | undefined {
+        if (!result.success || result.result?.status !== 'Ok' || !Array.isArray(result.result.data)) {
+            return undefined;
+        }
 
-        const stream = result[args.id];
-        if (!stream) return undefined;
-
-        const track = stream.current_track;
+        const track = result.result.data[0];
 
         return {
-            artist: track.song_artist,
-            title: track.song_title ?? track.name,
-            image: track.picture?.url_absolute ?? null,
+            artist: track.artist,
+            title: track.title,
+            image: track.cover ? `https://dfm.ru${track.cover}` : null,
             endTime: null,
         };
     }

@@ -6,13 +6,17 @@ export interface IPiterFmRaw {
     adnow: number;
     msItem: string;
     items: {
-        track: string;
-        artist: string;
-        duration: string; // 00:04:11
         startdate: string; // 2022-11-05
         starttime: string; // 01:33:20
-        imgsmall?: string;
-        imglarge?: string;
+        track: {
+            artist: {
+                name: string;
+            };
+            name: string;
+            duration: string; // 00:04:11
+            imgsmall?: string;
+            imglarge?: string;
+        };
     }[];
 }
 
@@ -27,17 +31,19 @@ export class PiterFmResolver extends Resolver<IPiterFmRaw> {
             };
         }
 
-        const track = result.items?.[0];
+        const item = result.items?.[0];
 
-        if (!track) return undefined;
+        if (!item) return undefined;
 
-        const startDate = new Date(`${track.startdate}T${track.starttime}+03:00`);
+        const { startdate, starttime, track } = item;
+
+        const startDate = new Date(`${startdate}T${starttime}+03:00`);
 
         const endTime = Math.floor(Number(startDate) / 1000) + this.parseDuration(track.duration);
 
         return {
-            artist: track.artist,
-            title: track.track,
+            artist: track.artist.name,
+            title: track.name,
             image: track.imglarge ?? track.imgsmall ?? null,
             endTime,
         };
