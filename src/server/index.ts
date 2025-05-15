@@ -5,7 +5,7 @@ import { getStations } from './apiMethods/getStations';
 import { getCurrentTrack } from './apiMethods/getCurrentTrack';
 import { getStreamById } from './apiMethods/getStreamById';
 
-import { SERVER_PORT } from '../shared';
+const SERVER_PORT = 7469;
 
 export const service = express();
 
