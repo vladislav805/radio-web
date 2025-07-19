@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { Resolver } from '@server/Resolver';
 import { leadZero } from '../../lib/leadZero';
 import type { ICurrentTrack } from '@typings';
@@ -37,15 +35,17 @@ export class DorozhnoeResolver extends Resolver<IDorozhnoeRaw, IDorozhnoeArgumen
             limit: '10',
         });
 
-        const { data } = await axios.get(`https://api.dorognoe.ru/api/playlists?${params.toString()}`, {
+        const request = await fetch(`https://api.dorognoe.ru/api/playlists?${params.toString()}`, {
             headers: {
-                'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0',
+                'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:130.0) Gecko/20100101 Firefox/130.0',
                 'X-Requested-With': 'XMLHttpRequest',
                 Referrer: 'https://api.dorognoe.ru/api/playlists',
             },
         });
+        const res = await request.json();
+        console.log(res);
 
-        return data as IDorozhnoeRaw;
+        return res;
     }
 
     protected override transform(result: IDorozhnoeRaw, args: IDorozhnoeArguments | undefined): ICurrentTrack | undefined {

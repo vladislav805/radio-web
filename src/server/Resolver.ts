@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import type { ICurrentTrack, IStreamDatabase } from '@typings';
 
 export type TResolverFetch = (args: any | undefined) => Promise<any | undefined>;
@@ -24,11 +22,9 @@ export abstract class Resolver<Raw extends object, ResolverArgument = never> {
      * Получение информации от сайта радиостанции или другого источника. По умолчанию ожидаем JSON.
      */
     protected async fetch(_args: ResolverArgument | undefined): Promise<Raw | undefined> {
-        const { data } = await axios.get(this.stream.trackUrl as string, {
-            responseType: 'json',
-        });
+        const request = await fetch(this.stream.trackUrl as string);
 
-        return data as Raw;
+        return request.json();
     }
 
     /**
