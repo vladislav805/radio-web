@@ -60,5 +60,6 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:vladislav805/radio-web.git"
-	}
+	},
+	"packageManager": "pnpm@10.13.1"
 }

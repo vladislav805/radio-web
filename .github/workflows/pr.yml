@@ -11,15 +11,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Setup dependencies
-        run: npm ci
+        run: pnpm i
       - name: Type check
-        run: npm run typechecking
+        run: pnpm typechecking
       - name: Unit test
-        run: npm run test
+        run: pnpm test
       - name: Build
-        run: npm run build:production
+        run: pnpm build:production
