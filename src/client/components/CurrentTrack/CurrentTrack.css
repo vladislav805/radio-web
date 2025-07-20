@@ -1,0 +1,53 @@
+.CurrentTrack {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.CurrentTrack-Cover {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (width < 700px) {
+        position: relative;
+    }
+}
+
+.CurrentTrack-Image {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+
+    transition: all .1s linear;
+
+    &:hover,
+    &:active {
+        position: absolute;
+        width: 6rem;
+        height: 6rem;
+
+        @media (width < 700px) {
+            left: 0;
+            bottom: 0;
+        }
+    }
+}
+
+.CurrentTrack-Info {
+    padding: 0 1rem;
+    flex: 1;
+    user-select: text;
+}
+
+.CurrentTrack-Button {
+    white-space: pre;
+    margin: 0 1rem;
+    text-align: right;
+}
+
+.CurrentTrack_supported .CurrentTrack-Button {
+    margin: 0 .5rem;
+}

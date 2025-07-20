@@ -3,11 +3,11 @@ import * as React from 'react';
 import { cnButton } from './Button.const';
 import type { IButtonProps } from './Button.typings';
 
-import './Button.scss';
-import './Button_type_normal.scss';
-import './Button_type_pure.scss';
-import './Button_view_default.scss';
-import './Button_view_block.scss';
+import './Button.css';
+import './Button_type_normal.css';
+import './Button_type_pure.css';
+import './Button_view_default.css';
+import './Button_view_block.css';
 
 export const Button: React.FC<IButtonProps> = props => {
     return (

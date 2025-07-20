@@ -8,7 +8,7 @@ import { Icon } from '@components/Icon';
 
 import { cnStreamList, streamListBackCn } from './StreamList.const';
 
-import './StreamList.scss';
+import './StreamList.css';
 
 interface IStreamListProps {
     station: IStation | undefined;

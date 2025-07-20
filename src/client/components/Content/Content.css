@@ -1,10 +1,8 @@
-@import '../SCSS/Utils.scss';
-
 .Content {
     overflow-x: hidden;
     overflow-y: hidden;
 
-    @include desktop {
+    @media (width >= 700px) {
         display: flex;
         flex-flow: row nowrap;
 
@@ -14,7 +12,7 @@
         }
     }
 
-    @include phone {
+    @media (width < 700px) {
         position: relative;
 
         .StreamList {

@@ -1,0 +1,62 @@
+.Range {
+    --local-thumb-size: 16px;
+    --local-track-width: 4px;
+    --local-track-progress: #2ecc71;
+    --local-track-rest: #555555;
+    --local-half-thumb-size: calc(var(--local-thumb-size) * .5);
+    --local-margin-fix: calc(var(--local-half-thumb-size) - var(--local-track-width) * .5);
+
+    -webkit-appearance: none;
+    appearance: none;
+
+    background: transparent;
+    width: 100%;
+
+    /* Thumb */
+    &::-webkit-slider-thumb {
+        /**
+        * Еще один недостаток в браузерах на основе WebKit и Blink заключается в том, что вы должны установить
+        * свойство -webkit-appearance: none для ползунка и для бегунка (но не для дорожки).
+        */
+        -webkit-appearance: none;
+        appearance: none;
+
+        width: var(--local-thumb-size);
+        height: var(--local-thumb-size);
+        border-radius: var(--local-half-thumb-size);
+        background: #ffffff;
+        margin-top: calc(-1 - var(--local-margin-fix));
+        cursor: pointer;
+        outline: none;
+    }
+
+    &::-moz-range-thumb {
+        width: var(--local-thumb-size);
+        height: var(--local-thumb-size);
+        border-radius: var(--local-half-thumb-size);
+        background: #ffffff;
+        position: absolute;
+        margin-left: calc(-1 * var(--local-margin-fix));
+        margin-top: calc(-1 * var(--local-margin-fix));
+        cursor: pointer;
+        outline: none;
+    }
+
+    /* Track */
+    &::-webkit-slider-runnable-track {
+        height: var(--local-track-width);
+        background: var(--local-track-rest);
+        border-radius: calc(var(--local-track-width) * .5);
+        background: linear-gradient(to right, var(--local-track-progress) 0%, var(--local-track-progress) var(--range-progress), var(--local-track-rest) var(--range-progress), var(--local-track-rest) 100%);
+    }
+
+    &::-moz-range-track {
+        height: var(--local-track-width);
+        background: var(--local-track-rest);
+        border-radius: calc(var(--local-track-width) * .5);
+    }
+
+    &::-moz-range-progress {
+        background: var(--local-track-progress);
+    }
+}

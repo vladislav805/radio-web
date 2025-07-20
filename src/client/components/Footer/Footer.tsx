@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { footerCn } from './Footer.const';
 
-import './Footer.scss';
+import './Footer.css';
 
 interface IFooterProps {
     station: IStation | undefined;

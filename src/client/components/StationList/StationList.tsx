@@ -5,7 +5,7 @@ import type { IStation } from '@typings';
 
 import { stationListCn } from './StationList.const';
 
-import './StationList.scss';
+import './StationList.css';
 
 interface IStationListProps {
     items: IStation[];

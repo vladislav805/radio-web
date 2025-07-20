@@ -5,7 +5,7 @@ import { Button } from '@components/Button';
 
 import { cnStationItem } from './StationItem.const';
 
-import './StationItem.scss';
+import './StationItem.css';
 
 interface IStationListItemProps {
     station: IStation;

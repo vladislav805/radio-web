@@ -10,7 +10,7 @@ import { HeaderTime } from './-Time';
 
 import { headerCn, headerToggleCn, headerVolumeCn, headerControlsCn } from './Header.const';
 
-import './Header.scss';
+import './Header.css';
 
 const ButtonWithIcon = withIcon(Button);
 

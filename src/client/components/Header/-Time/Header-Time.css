@@ -1,0 +1,17 @@
+.Header-Time {
+    line-height: 1.5rem;
+}
+
+.Header-Time-Row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: end;
+}
+
+.Header-Time-Label {
+    font-size: .8rem;
+}
+
+.Header-Time-Label + .Header-Time-Value {
+    margin-left: .4rem;
+}

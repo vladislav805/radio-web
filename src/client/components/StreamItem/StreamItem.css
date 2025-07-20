@@ -1,0 +1,118 @@
+.StreamItem {
+    position: relative;
+
+    padding: .5rem 1rem;
+
+    text-align: left;
+
+    line-height: 1.4rem;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    &:nth-child(1) {
+        animation: station-item .1s ease-in forwards 40ms 1;
+    }
+
+    &:nth-child(2) {
+        animation: station-item .1s ease-in forwards 80ms 1;
+    }
+
+    &:nth-child(3) {
+        animation: station-item .1s ease-in forwards 120ms 1;
+    }
+
+    &:nth-child(4) {
+        animation: station-item .1s ease-in forwards 160ms 1;
+    }
+
+    &:nth-child(5) {
+        animation: station-item .1s ease-in forwards 200ms 1;
+    }
+
+    &:nth-child(6) {
+        animation: station-item .1s ease-in forwards 240ms 1;
+    }
+
+    &:nth-child(7) {
+        animation: station-item .1s ease-in forwards 280ms 1;
+    }
+
+    &:nth-child(8) {
+        animation: station-item .1s ease-in forwards 320ms 1;
+    }
+
+    &:nth-child(9) {
+        animation: station-item .1s ease-in forwards 360ms 1;
+    }
+
+    &:nth-child(10) {
+        animation: station-item .1s ease-in forwards 400ms 1;
+    }
+
+    &:nth-child(11) {
+        animation: station-item .1s ease-in forwards 440ms 1;
+    }
+
+    &:nth-child(12) {
+        animation: station-item .1s ease-in forwards 480ms 1;
+    }
+
+    &:nth-child(13) {
+        animation: station-item .1s ease-in forwards 520ms 1;
+    }
+
+    &:nth-child(14) {
+        animation: station-item .1s ease-in forwards 560ms 1;
+    }
+
+    &:nth-child(15) {
+        animation: station-item .1s ease-in forwards 600ms 1;
+    }
+
+    &:nth-child(16) {
+        animation: station-item .1s ease-in forwards 640ms 1;
+    }
+
+    &:nth-child(17) {
+        animation: station-item .1s ease-in forwards 680ms 1;
+    }
+
+    &:nth-child(18) {
+        animation: station-item .1s ease-in forwards 720ms 1;
+    }
+
+    &:nth-child(19) {
+        animation: station-item .1s ease-in forwards 760ms 1;
+    }
+
+    &:nth-child(n+20) {
+        opacity: 1;
+        transform: translateY(0)
+    }
+
+    &:hover {
+        background: var(--color-station-background__hover);
+    }
+}
+
+.StreamItem-Meta {
+    font-size: .9rem;
+}
+
+.StreamItem_active {
+    background: var(--color-station-background__active);
+}
+
+@keyframes station-item {
+    0% {
+        opacity: 0;
+        transform: translateY(20px)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}

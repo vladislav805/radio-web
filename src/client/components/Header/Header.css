@@ -1,0 +1,27 @@
+.Header {
+    background: var(--color-header-background);
+    color: var(--color-header-foreground);
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Header-Controls {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.Header-Toggle {
+    margin: 0 .5rem;
+}
+
+.Header-Volume {
+    margin: 0 .5rem;
+}
+
+.Header-Time {
+    margin: 0 .5rem;
+}

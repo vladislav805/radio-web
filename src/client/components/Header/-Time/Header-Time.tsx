@@ -5,7 +5,7 @@ import { toTimeFormat } from '../../../../lib/toTimeFormat';
 
 import { headerTimeCn, headerTimeLabelCn, headerTimeRowBufferedCn, headerTimeRowPlayedCn, headerTimeValueCn } from './Header-Time.const';
 
-import './Header-Time.scss';
+import './Header-Time.css';
 
 export const HeaderTime: React.FC = () => {
     const { audio } = React.useContext(RadioContext);

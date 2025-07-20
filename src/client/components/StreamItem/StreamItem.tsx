@@ -5,7 +5,7 @@ import { Button } from '@components/Button';
 
 import { cnStreamItem, streamItemMetaCn, streamItemTitleCn } from './StreamItem.const';
 
-import './StreamItem.scss';
+import './StreamItem.css';
 
 interface IStreamItemProps {
     stream: IStream;

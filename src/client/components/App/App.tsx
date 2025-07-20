@@ -8,7 +8,7 @@ import { Player } from '@components/Player';
 
 import { appCn } from './App.const';
 
-import './App.scss';
+import './App.css';
 
 export const App: React.FC = () => {
     const [context, dispatch] = React.useReducer(radioContextReducer, defaultRadioContext);

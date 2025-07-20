@@ -5,7 +5,7 @@ import type { IconType } from '@components/Icon/Icon.registry';
 
 import type { IButtonProps } from '../Button.typings';
 
-import './Button_icon.scss';
+import './Button_icon.css';
 
 interface IButtonWithIconProps {
     iconType: IconType;

@@ -7,7 +7,7 @@ import { StreamList } from '@components/StreamList';
 
 import { contentCn } from './Content.const';
 
-import './Content.scss';
+import './Content.css';
 
 interface IContentProps {
     activeStation?: IStation;

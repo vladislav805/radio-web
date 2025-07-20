@@ -1,6 +1,3 @@
-@import './components/SCSS/Constants.scss';
-@import './components/SCSS/Utils.scss';
-
 * {
     margin: 0;
     padding: 0;
@@ -28,7 +25,7 @@ body {
 }
 
 #root {
-    @include desktop {
+    @media (width >= 700px) {
         display: flex;
         flex-direction: column;
 

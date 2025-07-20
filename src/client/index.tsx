@@ -3,7 +3,8 @@ import * as ReactDOM from 'react-dom/client';
 
 import { App } from '@components/App';
 
-import './legacy.scss';
+import './legacy.css';
+import './theme.css';
 
 const rootElement = document.getElementById('root');
 

@@ -33,11 +33,11 @@ export const config = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.s?css$/i,
+                test: /\.css$/i,
                 use: [
                     isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
                     'css-loader',
-                    'sass-loader',
+                    'postcss-loader',
                 ],
             },
         ],

@@ -3,8 +3,6 @@ import * as React from 'react';
 import { cnIcon } from './Icon.const';
 import { iconRegistry, type IconType } from './Icon.registry';
 
-import './Icon.scss';
-
 interface IIconProps {
     type: IconType;
     className?: string;

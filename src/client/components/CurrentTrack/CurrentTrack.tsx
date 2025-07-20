@@ -8,7 +8,7 @@ import { withIcon } from '@components/Button/_icon';
 
 import { cnCurrentTrack, currentTrackButtonCn, currentTrackCoverCn, currentTrackInfoCn, currentTrackImageCn } from './CurrentTrack.const';
 
-import './CurrentTrack.scss';
+import './CurrentTrack.css';
 
 interface ICurrentTrackProps {
     station: IStation | undefined;

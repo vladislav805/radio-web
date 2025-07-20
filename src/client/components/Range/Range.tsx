@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { rangeCn } from './Range.const';
 
-import './Range.scss';
+import './Range.css';
 
 interface IRangeProps {
     value: number;
