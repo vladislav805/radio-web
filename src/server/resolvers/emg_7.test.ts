@@ -1,3 +1,5 @@
+import { expect, describe, it, beforeEach, type Mock, vi } from 'vitest';
+
 import type { IStreamDatabase } from '@typings';
 
 import { type IEmg7Raw, Emg7Resolver } from './emg_7';
@@ -8,7 +10,7 @@ describe('resolvers/emg_7', () => {
     let result: IEmg7Raw;
 
     let resolver: Emg7Resolver;
-    let fetch: jest.Mock<Promise<IEmg7Raw>>;
+    let fetch: Mock<() => Promise<IEmg7Raw>>;
 
     beforeEach(() => {
         stream = {
@@ -34,13 +36,9 @@ describe('resolvers/emg_7', () => {
         } as IEmg7Raw;
 
         // @ts-expect-error protected
-        resolver.fetch = fetch = jest.fn();
+        resolver.fetch = fetch = vi.fn();
 
         fetch.mockResolvedValue(result);
-    });
-
-    afterEach(() => {
-        jest.clearAllMocks();
     });
 
     // Таких данных здесь нет

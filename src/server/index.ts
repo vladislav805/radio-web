@@ -4,6 +4,7 @@ import type { IApiParams, IError } from '@typings';
 import { getStations } from './apiMethods/getStations';
 import { getCurrentTrack } from './apiMethods/getCurrentTrack';
 import { getStreamById } from './apiMethods/getStreamById';
+import { checkAll } from './apiMethods/checkAll';
 
 const SERVER_PORT = 7469;
 
@@ -13,6 +14,7 @@ const methods: Record<string, (params: IApiParams) => unknown> = {
     getStations,
     getCurrentTrack,
     getStreamById,
+    checkAll,
 };
 
 service.all('/api/:method', async(req, res) => {

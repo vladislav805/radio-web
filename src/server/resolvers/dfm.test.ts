@@ -1,3 +1,5 @@
+import { expect, describe, it, beforeEach, type Mock, vi } from 'vitest';
+
 import type { IStreamDatabase } from '@typings';
 
 import { type IDfmRaw, DfmResolver } from './dfm';
@@ -8,7 +10,7 @@ describe('resolvers/dfm', () => {
     let result: IDfmRaw;
 
     let resolver: DfmResolver;
-    let fetch: jest.Mock<Promise<IDfmRaw>>;
+    let fetch: Mock<() =>Promise<IDfmRaw>>;
 
     beforeEach(() => {
         stream = {
@@ -32,13 +34,9 @@ describe('resolvers/dfm', () => {
         };
 
         // @ts-expect-error protected
-        resolver.fetch = fetch = jest.fn();
+        resolver.fetch = fetch = vi.fn();
 
         fetch.mockResolvedValue(result);
-    });
-
-    afterEach(() => {
-        jest.clearAllMocks();
     });
 
     it('should return track with image', async() => {

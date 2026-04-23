@@ -16,7 +16,7 @@
         "verbatimModuleSyntax": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "types": ["jest", "node"],
+        "types": ["node"],
         "paths": {
             "@components/*": ["./src/client/components/*"],
             "@lib/*": ["./src/client/lib/*"],
