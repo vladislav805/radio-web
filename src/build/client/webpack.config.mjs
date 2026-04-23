@@ -52,6 +52,12 @@ export const config = {
         },
     },
 
+    externals: {
+        react: 'window.React',
+        'react-dom': 'window.ReactDOM',
+        'react-dom/client': 'window.ReactDOM',
+    },
+
     optimization: {
         minimize: isProduction,
         minimizer: [new TerserPlugin({
