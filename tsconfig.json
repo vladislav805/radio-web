@@ -15,12 +15,17 @@
         "removeComments": false,
         "baseUrl": ".",
         "verbatimModuleSyntax": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "paths": {
-            "@components/*": ["src/client/components/*"],
-            "@lib/*": ["src/client/lib/*"],
-            "@typings": ["src/typings"],
-            "@typings/*": ["src/typings/*"],
-            "@server/*": ["src/server/*"]
+            "@components/*": ["./src/client/components/*"],
+            "@lib/*": ["./src/client/lib/*"],
+            "@typings": ["./src/typings"],
+            "@typings/*": ["./src/typings/*"],
+            "@server/*": ["./src/server/*"]
         }
-    }
+    },
+    "include": [
+        "src/**/*"
+    ]
 }

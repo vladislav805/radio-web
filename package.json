@@ -14,41 +14,41 @@
 		"typechecking": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@bem-react/classname": "1.7.0",
-		"body-parser": "2.2.0",
+		"@bem-react/classname": "1.8.0",
+		"body-parser": "2.2.2",
 		"classnames": "2.5.1",
-		"express": "5.1.0",
-		"hls.js": "1.6.7",
-		"mysql2": "3.14.2",
-		"react": "19.1.0",
-		"react-dom": "19.1.0"
+		"express": "5.2.1",
+		"hls.js": "1.6.16",
+		"mysql2": "3.22.2",
+		"react": "19.2.5",
+		"react-dom": "19.2.5"
 	},
 	"devDependencies": {
-		"@types/express": "5.0.3",
+		"@types/express": "5.0.6",
 		"@types/jest": "30.0.0",
 		"@types/node": "22.15.18",
-		"@types/react": "19.1.8",
-		"@types/react-dom": "19.1.6",
+		"@types/react": "19.2.14",
+		"@types/react-dom": "19.2.3",
 		"@veluga/esbuild-restart-on-rebuild": "0.0.2",
-		"css-loader": "7.1.2",
-		"dotenv": "17.2.0",
-		"esbuild": "0.25.8",
-		"html-webpack-plugin": "5.6.3",
-		"jest": "30.0.4",
-		"mini-css-extract-plugin": "2.9.2",
+		"css-loader": "7.1.4",
+		"dotenv": "17.4.2",
+		"esbuild": "0.28.0",
+		"html-webpack-plugin": "5.6.7",
+		"jest": "30.3.0",
+		"mini-css-extract-plugin": "2.10.2",
 		"npm-run-all": "4.1.5",
-		"postcss": "8.5.6",
+		"postcss": "8.5.10",
 		"postcss-calc": "10.1.1",
 		"postcss-load-config": "6.0.1",
-		"postcss-loader": "8.1.1",
+		"postcss-loader": "8.2.1",
 		"postcss-media-minmax": "5.0.0",
-		"postcss-nesting": "13.0.2",
+		"postcss-nesting": "14.0.0",
 		"style-loader": "4.0.0",
-		"swc-loader": "0.2.6",
-		"terser-webpack-plugin": "5.3.14",
-		"ts-jest": "29.4.0",
-		"typescript": "5.8.3",
-		"webpack": "5.100.2"
+		"swc-loader": "0.2.7",
+		"terser-webpack-plugin": "5.4.0",
+		"ts-jest": "29.4.9",
+		"typescript": "6.0.3",
+		"webpack": "5.106.2"
 	},
 	"author": {
 		"email": "vlad@velu.ga",
@@ -62,5 +62,5 @@
 		"type": "git",
 		"url": "git@github.com:vladislav805/radio-web.git"
 	},
-	"packageManager": "pnpm@10.13.1"
+	"packageManager": "pnpm@10.33.2"
 }
