@@ -57,7 +57,7 @@ export const Player: React.FC<IPlayerProps> = ({ stream }) => {
 
     React.useEffect(() => {
         // Замыкания для функции коллбека-onunmount
-        let audioLocal: HTMLAudioElement;
+        let audioLocal: HTMLAudioElement | undefined;
 
         const onPlay = () => dispatch({ action: 'state', state: RadioState.PLAYING });
         const onPause = () => dispatch({ action: 'state', state: RadioState.PAUSED });
@@ -87,12 +87,14 @@ export const Player: React.FC<IPlayerProps> = ({ stream }) => {
                 hlsRef.current = null;
             }
 
-            audioLocal.removeEventListener('waiting', onLoading);
-            audioLocal.removeEventListener('playing', onPlay);
-            audioLocal.removeEventListener('pause', onPause);
+            if (audioLocal !== undefined) {
+                audioLocal.removeEventListener('waiting', onLoading);
+                audioLocal.removeEventListener('playing', onPlay);
+                audioLocal.removeEventListener('pause', onPause);
+                audioLocal.src = BLANK;
+            }
 
             dispatch({ action: 'init', audio: undefined });
-            audioLocal.src = BLANK;
         };
     }, [stream, dispatch]);
 
