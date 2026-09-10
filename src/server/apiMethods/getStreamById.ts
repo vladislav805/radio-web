@@ -25,6 +25,7 @@ export async function getStreamById(props: IApiParams): Promise<IStreamDatabase 
 
         return stream;
     } catch (err) {
+        console.error(err);
         throw new Error('Unknown error');
     } finally {
         connect?.destroy();

@@ -77,6 +77,7 @@ export async function getStations(rawParams: IApiParams): Promise<IStation[]> {
 
         return result;
     } catch (e) {
+        console.error(e);
         throw new Error('Unknown error');
     } finally {
         connect?.destroy();
