@@ -1,0 +1,12 @@
+services:
+  radio-web:
+    image: ghcr.io/vladislav805/radio-web:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      PORT: 7469
+    ports:
+      - "127.0.0.1:7469:7469"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

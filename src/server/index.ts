@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import express from 'express';
 import type { IApiParams, IError } from '@typings';
 
@@ -6,7 +7,7 @@ import { getCurrentTrack } from './apiMethods/getCurrentTrack';
 import { getStreamById } from './apiMethods/getStreamById';
 import { checkAll } from './apiMethods/checkAll';
 
-const SERVER_PORT = 7469;
+const SERVER_PORT = Number(process.env.PORT ?? 7469);
 
 export const service = express();
 
@@ -40,6 +41,27 @@ service.all('/api/:method', async(req, res) => {
     }
 
     res.send(response);
+});
+
+service.use((req, res, next) => {
+    const hasHiddenPathSegment = req.path
+        .split('/')
+        .some(pathSegment => pathSegment.startsWith('.'));
+
+    if (hasHiddenPathSegment) {
+        res.sendStatus(404);
+        return;
+    }
+
+    next();
+});
+
+service.use(express.static(__dirname, {
+    dotfiles: 'ignore',
+}));
+
+service.get(/.*/, (_req, res) => {
+    res.sendFile(resolve(__dirname, 'index.html'));
 });
 
 service.listen(SERVER_PORT, () => console.log(`Server started: http://localhost:${SERVER_PORT}/`));
