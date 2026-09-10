@@ -5,35 +5,71 @@ on:
     branches:
       - master
 
+env:
+  IMAGE_NAME: ghcr.io/${{ github.repository }}
+  SERVER_HOST: '135.181.147.70'
+  SERVER_USER: vlad805
+  SERVER_PATH: /home/vlad805/projects/radio
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
-        with:
-          run_install: |
-            - recursive: true
-              args: [--frozen-lockfile, --strict-peer-dependencies]
+
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
           node-version: '24'
+
       - name: Setup dependencies
-        run: pnpm i
+        run: pnpm install --frozen-lockfile
+
       - name: Type check
         run: pnpm typechecking
+
       - name: Unit test
         run: pnpm test
-      - name: Build
-        run: pnpm build:production
-      - name: Deploy
-        uses: D3rHase/rsync-deploy-action@latest
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v4
         with:
-          REPOSITORY_PATH: dist/
-          USER: vlad805
-          HOST: '135.181.147.70'
-          SERVER_PATH: /home/vlad805/projects/radio/
-          PRIVATE_SSH_KEY: ${{ secrets.ssh_key }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v7.2.0
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
+
+      - name: Deploy
+        env:
+          SSH_KEY: ${{ secrets.ssh_key }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/radio_deploy_key
+          chmod 600 ~/.ssh/radio_deploy_key
+          ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
+
+          ssh -i ~/.ssh/radio_deploy_key "$SERVER_USER@$SERVER_HOST" "mkdir -p '$SERVER_PATH'"
+          scp -i ~/.ssh/radio_deploy_key compose.yml "$SERVER_USER@$SERVER_HOST:$SERVER_PATH/compose.yml"
+          ssh -i ~/.ssh/radio_deploy_key "$SERVER_USER@$SERVER_HOST" "
+            set -e
+            cd '$SERVER_PATH'
+            printf '%s\n' '$GHCR_TOKEN' | docker login ghcr.io -u '${{ github.actor }}' --password-stdin
+            docker compose pull
+            docker compose up -d
+          "
